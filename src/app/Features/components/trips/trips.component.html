@@ -1,1 +1,63 @@
-<p>trips works!</p>
+<div class="trips-container">
+  <h1>Our Safari Adventures</h1>
+  <div class="trips-grid">
+    <div
+      class="trip-card"
+      *ngFor="let trip of trips"
+      (click)="navigateToDetails(trip.id)"
+      style="cursor: pointer"
+    >
+      <img
+        [src]="trip.image"
+        [alt]="trip.title"
+        onerror="this.src='/assets/trips/placeholder.svg'"
+      />
+      <div class="gradient-overlay"></div>
+      <div class="trip-info">
+        <h2>{{ trip.title }}</h2>
+        <p class="description">{{ trip.description }}</p>
+        <div class="trip-details">
+          <div class="detail">
+            <i class="pi pi-clock"></i>
+            <span>{{ trip.duration }}</span>
+          </div>
+          <div class="detail">
+            <i class="pi pi-map-marker"></i>
+            <span>{{ trip.location }}</span>
+          </div>
+          <div class="detail">
+            <i class="pi pi-users"></i>
+            <span>{{ trip.groupSize }}</span>
+          </div>
+          <div class="detail">
+            <i class="pi pi-chart-line"></i>
+            <span>{{ trip.difficulty }}</span>
+          </div>
+        </div>
+        <div class="rating-section">
+          <div class="stars">
+            <i
+              class="pi pi-star-fill"
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+              [class.filled]="star <= trip.rating"
+            ></i>
+          </div>
+          <span class="rating-text"
+            >{{ trip.rating }} ({{ trip.reviewCount }} reviews)</span
+          >
+        </div>
+        <div class="trip-footer">
+          <div class="price-tag">
+            <span class="currency">$</span>
+            <span class="amount">{{ trip.price }}</span>
+          </div>
+          <button
+            pButton
+            label="Book Now"
+            class="p-button-warning p-button-rounded"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
