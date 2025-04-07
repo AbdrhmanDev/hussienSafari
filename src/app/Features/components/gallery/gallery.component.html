@@ -1,0 +1,88 @@
+<div class="gallery-container">
+  <div class="gallery-header">
+    <h1>Our Adventure Gallery</h1>
+    <p class="subtitle">Explore our thrilling desert adventures</p>
+
+    <div class="category-filters">
+      <button
+        pButton
+        *ngFor="let category of categories"
+        [label]="category | titlecase"
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)"
+        [class]="
+          selectedCategory === category
+            ? 'p-button-warning'
+            : 'p-button-outlined'
+        "
+        class="p-button-rounded"
+      ></button>
+    </div>
+  </div>
+
+  <div class="gallery-grid" [@galleryAnimation]="selectedCategory">
+    <div
+      *ngFor="let item of getFilteredItems()"
+      class="gallery-item"
+      [class.video-item]="item.type === 'video'"
+      [@itemAnimation]
+    >
+      <div class="item-wrapper">
+        <img [src]="item.url" [alt]="item.title" loading="lazy" />
+        <div class="item-overlay">
+          <div class="item-actions">
+            <button
+              class="action-btn favorite"
+              (click)="toggleFavorite($event, item)"
+              [class.active]="item.isFavorite"
+            >
+              <i
+                class="pi"
+                [class.pi-heart-fill]="item.isFavorite"
+                [class.pi-heart]="!item.isFavorite"
+              ></i>
+              <span class="love-count" *ngIf="item.loveCount > 0">{{
+                item.loveCount
+              }}</span>
+            </button>
+            <button
+              class="action-btn download"
+              (click)="downloadImage($event, item)"
+            >
+              <i class="pi pi-download"></i>
+            </button>
+          </div>
+          <div class="item-info" (click)="openLightbox(item)">
+            <h3>{{ item.title }}</h3>
+            <p-tag [value]="item.category" severity="warn"></p-tag>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" *ngIf="showLightbox" (click)="closeLightbox()">
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeLightbox()">
+        <i class="pi pi-times"></i>
+      </button>
+      <ng-container [ngSwitch]="selectedItem?.type">
+        <img
+          *ngSwitchCase="'image'"
+          [src]="selectedItem?.url"
+          [alt]="selectedItem?.title"
+        />
+        <video *ngSwitchCase="'video'" controls>
+          <source [src]="selectedItem?.url" type="video/mp4" />
+        </video>
+      </ng-container>
+      <div class="lightbox-caption">
+        <h3>{{ selectedItem?.title }}</h3>
+        <p-tag [value]="selectedItem?.category" severity="warn"></p-tag>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-toast position="bottom-right"></p-toast>

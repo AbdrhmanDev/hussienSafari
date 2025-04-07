@@ -1,0 +1,112 @@
+<div class="about-container">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-image-container">
+        <img
+          src="assets/hussien.jpg"
+          alt="Safari Guide Hussien"
+          class="hero-image"
+        />
+      </div>
+      <div class="hero-text">
+        <h1>Welcome to Desert Adventures</h1>
+        <p class="subtitle">With Professional Guide Hussien</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section" [class.animate]="isVisible">
+    <div class="stat-card">
+      <div class="stat-icon"><i class="pi pi-calendar"></i></div>
+      <div class="stat-content">
+        <div class="stat-number">{{ yearsExperience }}+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ successfulTrips }}+</div>
+      <div class="stat-label">Adventures Led</div>
+      <div class="stat-icon"><i class="pi pi-map"></i></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ happyCustomers }}+</div>
+      <div class="stat-label">Happy Explorers</div>
+      <div class="stat-icon"><i class="pi pi-users"></i></div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="about-content">
+    <div class="guide-profile">
+      <div class="profile-images">
+        <img
+          src="assets/hussien2.jpg"
+          alt="Guide in Action"
+          class="action-image"
+        />
+        <img
+          src="assets/hussien3.jpg"
+          alt="Desert Adventure"
+          class="action-image"
+        />
+      </div>
+      <div class="profile-info">
+        <h2>Meet Your Desert Guide</h2>
+        <div class="experience-tags">
+          <span class="tag"
+            ><i class="pi pi-check-circle"></i> Professional Guide</span
+          >
+          <span class="tag"><i class="pi pi-shield"></i> Safety Expert</span>
+          <span class="tag"><i class="pi pi-map"></i> Local Expert</span>
+        </div>
+        <p class="guide-description">
+          Experience the thrill of desert adventures with a guide who knows
+          every dune and trail. Join Hussien for unforgettable quad bike tours
+          across Egypt's magnificent desert landscape.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="cta-background">
+        <div class="cta-content">
+          <h2>Ready for an Unforgettable Desert Adventure?</h2>
+          <p class="cta-description">
+            Join us for an extraordinary journey through Egypt's golden dunes
+          </p>
+          <div class="features-list">
+            <div class="feature-item">
+              <i class="pi pi-check-circle"></i>
+              <span>Professional Equipment</span>
+            </div>
+            <div class="feature-item">
+              <i class="pi pi-check-circle"></i>
+              <span>Expert Guidance</span>
+            </div>
+            <div class="feature-item">
+              <i class="pi pi-check-circle"></i>
+              <span>Memorable Experience</span>
+            </div>
+          </div>
+          <div class="cta-buttons">
+            <p-button
+              label="Start Your Journey"
+              icon="pi pi-compass"
+              styleClass="p-button-lg p-button-warning"
+              [style]="{ 'min-width': '200px' }"
+            ></p-button>
+            <p-button
+              label="Contact Guide"
+              icon="pi pi-send"
+              styleClass="p-button-lg p-button-outlined p-button-warning"
+              [style]="{ 'min-width': '200px' }"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

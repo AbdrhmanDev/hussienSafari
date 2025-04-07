@@ -38,13 +38,13 @@ export class NavbarComponent {
     
     { label: 'Testimonials', icon: 'pi pi-star', routerLink: '/testimonials' },
     { label: 'About', icon: 'pi pi-info-circle', routerLink: '/about' },
-    {
-      label: 'Special Offers',
-      icon: 'pi pi-tag',
-      routerLink: '/special-offers',
-    },
-    { label: 'FAQ', icon: 'pi pi-question-circle', routerLink: '/faq' },
-    { label: 'Contact Us', icon: 'pi pi-envelope', routerLink: '/contact' },
+    // {
+    //   label: 'Special Offers',
+    //   icon: 'pi pi-tag',
+    //   routerLink: '/special-offers',
+    // },
+    // { label: 'FAQ', icon: 'pi pi-question-circle', routerLink: '/faq' },
+    // { label: 'Contact Us', icon: 'pi pi-envelope', routerLink: '/contact' },
     { label: 'Blog', icon: 'pi pi-book', routerLink: '/blog' },
     
     // { label: 'Help Center', icon: 'pi pi-info', routerLink: '/help' },

@@ -1,176 +1,149 @@
 <!-- trip-details.component.html -->
 <div class="trip-details-container">
-  <!-- Top Section -->
   <div class="top-section">
-    <div class="media-slider">
-      <p-galleria
-        [value]="images"
-        [responsiveOptions]="responsiveOptions"
-        [containerStyle]="{ 'max-width': '100%' }"
-        [numVisible]="1"
-        [circular]="true"
-        [showItemNavigators]="true"
-        [showThumbnails]="true"
-      >
-        <ng-template pTemplate="item" let-item>
-          <img [src]="item.url" alt="Trip Image" class="hero-image" />
-        </ng-template>
-      </p-galleria>
+    <div class="left-column">
+      <div class="media-slider">
+        <p-galleria
+          [value]="images"
+          [responsiveOptions]="responsiveOptions"
+          [containerStyle]="{ 'max-width': '100%', margin: '0 auto' }"
+          [numVisible]="5"
+          [circular]="true"
+          [showItemNavigators]="true"
+          [showThumbnails]="true"
+          [showIndicators]="true"
+        >
+          <ng-template pTemplate="item" let-item>
+            <div class="galleria-item">
+              <img [src]="item.url" [alt]="trip?.title" class="hero-image" />
+            </div>
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <div class="galleria-thumbnail">
+              <img [src]="item.url" [alt]="trip?.title" />
+            </div>
+          </ng-template>
+        </p-galleria>
+      </div>
+
+      <div class="trip-highlights">
+        <h3>Trip Highlights</h3>
+        <ul>
+          <li><i class="pi pi-check-circle"></i> Professional Guide</li>
+          <li><i class="pi pi-check-circle"></i> Safety Equipment</li>
+          <li><i class="pi pi-check-circle"></i> Refreshments Included</li>
+          <li><i class="pi pi-check-circle"></i> Photo Opportunities</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="trip-main-details">
-      <h1>{{ trip?.title }}</h1>
-      <p-tag [value]="trip?.category" severity="info"></p-tag>
-
-      <div class="trip-meta">
-        <div class="meta-info">
-          <h4>Duration</h4>
-          <p>{{ trip?.duration }}</p>
+    <div class="right-column">
+      <div class="trip-main-details">
+        <div class="details-header">
+          <h1>{{ trip?.title }}</h1>
+          <p-tag
+            [value]="trip?.category"
+            severity="info"
+            styleClass="category-tag"
+          ></p-tag>
         </div>
-        <div class="meta-info">
-          <h4>Location</h4>
-          <p>{{ trip?.location }}</p>
+
+        <div class="trip-meta">
+          <div class="meta-info">
+            <i class="pi pi-clock"></i>
+            <div class="meta-content">
+              <h4>Duration</h4>
+              <p>{{ trip?.duration }}</p>
+            </div>
+          </div>
+          <div class="meta-info">
+            <i class="pi pi-map-marker"></i>
+            <div class="meta-content">
+              <h4>Location</h4>
+              <p>{{ trip?.location }}</p>
+            </div>
+          </div>
+          <div class="meta-info">
+            <i class="pi pi-dollar"></i>
+            <div class="meta-content">
+              <h4>Price</h4>
+              <p>${{ trip?.price }}</p>
+            </div>
+          </div>
         </div>
-        <div class="meta-info">
-          <h4>Price</h4>
-          <p>${{ trip?.price }}</p>
+
+        <div class="trip-description">
+          <h3>Description</h3>
+          <p>{{ trip?.description }}</p>
         </div>
-      </div>
 
-      <div class="trip-description">
-        <h3>Description</h3>
-        <p>{{ trip?.description }}</p>
-      </div>
+        <!-- Safari Map Section with Animation and Interactivity -->
+        <div class="destination-curve-container">
+          <div class="safari-banner">
+            <h2>انطلق في مغامرتك في جبال البحر الأحمر!</h2>
+            <button
+              pButton
+              label="احجز رحلتك الآن"
+              class="p-button-warning mt-2"
+            ></button>
+          </div>
 
-      <!-- <div class="destination-visual">
-        <div class="path-line">
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Barcelona
-          </span>
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Madrid
-          </span>
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Costa Brava
-          </span>
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Pyrenees
-          </span>
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Alicante
-          </span>
-          <span class="location">
-            <i class="pi pi-map-marker"></i> Park Guell
-          </span>
+          <svg viewBox="0 0 1000 200" class="curve-svg">
+            <!-- المسار المنقط -->
+            <image xlink:href="assets/quad.png" width="60" height="60">
+              <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
+                <mpath xlink:href="#path" />
+              </animateMotion>
+            </image>
+            <path
+              id="path"
+              d="M 50 150 C 250 50, 750 50, 950 150"
+              stroke="#00b4d8"
+              stroke-dasharray="10,10"
+              stroke-width="4"
+              fill="transparent"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="1000"
+                to="0"
+                dur="3s"
+                repeatCount="1"
+                fill="freeze"
+              />
+            </path>
+
+            <!-- نقاط الوجهات -->
+            <circle cx="50" cy="150" r="8" fill="#0077b6" />
+            <text x="30" y="140" class="location-label">نقطة البداية</text>
+
+            <circle cx="250" cy="90" r="8" fill="#0077b6" />
+            <text x="230" y="80" class="location-label">الوادي الرملي</text>
+
+            <circle cx="500" cy="50" r="8" fill="#0077b6" />
+            <text x="480" y="40" class="location-label">قمة الجبل</text>
+
+            <circle cx="750" cy="90" r="8" fill="#0077b6" />
+            <text x="730" y="80" class="location-label">نقطة تصوير</text>
+
+            <circle cx="950" cy="150" r="8" fill="#0077b6" />
+            <text x="930" y="140" class="location-label">النهاية</text>
+          </svg>
         </div>
-      </div> -->
-      <!-- Destination Visual - Static Artistic Path -->
-      <!-- SVG Curve Path with Map Pins -->
-      <!-- <div class="destination-curve-container">
-        <svg viewBox="0 0 1000 300" class="curve-svg">
-         
-          <path
-            d="M 50 150
-               C 150 50, 250 50, 350 150
-               S 550 250, 650 150
-               S 850 50, 950 150"
-            stroke="#00b4d8"
-            stroke-dasharray="10,10"
-            stroke-width="3"
-            fill="transparent"
-          />
 
-      
-          <circle cx="50" cy="150" r="8" fill="#0077b6" />
-          <text x="30" y="140" class="location-label">Barcelona</text>
+        <div class="trip-rating">
+          <h3>Rating</h3>
+          <p-rating [ngModel]="trip?.rating" [readonly]="true"></p-rating>
+        </div>
 
-          <circle cx="200" cy="75" r="8" fill="#0077b6" />
-          <text x="180" y="65" class="location-label">Madrid</text>
-
-          <circle cx="350" cy="150" r="8" fill="#0077b6" />
-          <text x="330" y="140" class="location-label">Alicante</text>
-
-          <circle cx="500" cy="225" r="8" fill="#0077b6" />
-          <text x="480" y="215" class="location-label">Costa Brava</text>
-
-          <circle cx="650" cy="150" r="8" fill="#0077b6" />
-          <text x="630" y="140" class="location-label">Seville</text>
-
-          <circle cx="800" cy="75" r="8" fill="#0077b6" />
-          <text x="780" y="65" class="location-label">Granada</text>
-
-          <circle cx="950" cy="150" r="8" fill="#0077b6" />
-          <text x="930" y="140" class="location-label">Park Guell</text>
-        </svg>
-      </div> -->
-      <!-- Safari Map Section with Animation and Interactivity -->
-      <div class="destination-curve-container">
-        <div class="safari-banner">
-          <h2>انطلق في مغامرتك في جبال البحر الأحمر!</h2>
+        <div class="footer">
           <button
             pButton
-            label="احجز رحلتك الآن"
-            class="p-button-warning mt-2"
+            label="Book Now"
+            icon="pi pi-check"
+            class="p-button-success"
           ></button>
         </div>
-
-        <svg viewBox="0 0 1000 200" class="curve-svg">
-          <!-- المسار المنقط -->
-          <image xlink:href="assets/quad.png" width="60" height="60">
-            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto">
-              <mpath xlink:href="#path" />
-            </animateMotion>
-          </image>
-          <path
-            id="path"
-            d="M 50 150 C 250 50, 750 50, 950 150"
-            stroke="#00b4d8"
-            stroke-dasharray="10,10"
-            stroke-width="4"
-            fill="transparent"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="1000"
-              to="0"
-              dur="3s"
-              repeatCount="1"
-              fill="freeze"
-            />
-          </path>
-
-        
-
-          <!-- نقاط الوجهات -->
-          <circle cx="50" cy="150" r="8" fill="#0077b6" />
-          <text x="30" y="140" class="location-label">نقطة البداية</text>
-
-          <circle cx="250" cy="90" r="8" fill="#0077b6" />
-          <text x="230" y="80" class="location-label">الوادي الرملي</text>
-
-          <circle cx="500" cy="50" r="8" fill="#0077b6" />
-          <text x="480" y="40" class="location-label">قمة الجبل</text>
-
-          <circle cx="750" cy="90" r="8" fill="#0077b6" />
-          <text x="730" y="80" class="location-label">نقطة تصوير</text>
-
-          <circle cx="950" cy="150" r="8" fill="#0077b6" />
-          <text x="930" y="140" class="location-label">النهاية</text>
-        </svg>
-      </div>
-
-      <div class="trip-rating">
-        <h3>Rating</h3>
-        <p-rating [ngModel]="trip?.rating" [readonly]="true"></p-rating>
-      </div>
-
-      <div class="footer">
-        <button
-          pButton
-          label="Book Now"
-          icon="pi pi-check"
-          class="p-button-success"
-        ></button>
       </div>
     </div>
   </div>
