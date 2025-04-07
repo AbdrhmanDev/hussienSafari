@@ -118,6 +118,15 @@ export class TripDetailsComponent implements OnInit {
       videoElement.play(); // Play the video programmatically
     }
   }
+  showHeroVideo = false;
+
+  playHeroVideo() {
+    this.showHeroVideo = true;
+  }
+
+  closeHeroVideo() {
+    this.showHeroVideo = false;
+  }
 
   stopVideo(): void {
     if (this.activeVideo) {
@@ -142,7 +151,7 @@ export class TripDetailsComponent implements OnInit {
 
   getVideoThumbnail(videoUrl: string): string {
     // Ensure the thumbnail path is correct
-    const basePath = 'assets/thumbnails/'; // Adjust this path to match your project structure
+    const basePath = 'videos/'; // Adjust this path to match your project structure
     const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '.jpg');
     return `${basePath}${videoFileName}`;
   }

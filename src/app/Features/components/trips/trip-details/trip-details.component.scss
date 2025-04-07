@@ -1,314 +1,406 @@
-// Variables
-$primary-color: #007bff;
-$secondary-color: #6c757d;
-$success-color: #28a745;
-$text-color: #333;
-$background-color: #f8f9fa;
-$border-radius: 8px;
-
-// Global Styles
-body {
-  font-family: "Arial", sans-serif;
-  color: $text-color;
-  background-color: $background-color;
-}
-
 .trip-details-container {
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem;
-  margin-top: 100px; // Adjust this value to match the navbar height
+  background-color: #f9f9f9;
 
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
+  .top-section {
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
+    margin-bottom: 3rem;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .slider-column {
-    .hero-image {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: $border-radius;
-    }
-
-    .hero-video {
-      width: 100%;
-      height: 300px;
-      border-radius: $border-radius;
-    }
-  }
-
-  .details-column {
-    .trip-info-card {
-      background: white;
-      border-radius: $border-radius;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .media-slider {
+      flex: 1 1 50%;
+      background: #fff;
+      border-radius: 1rem;
       padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
-      .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1.5rem;
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #007bff;
+      }
 
-        h1 {
-          margin: 0;
-          font-size: 1.8rem;
+      .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      .video-section {
+        margin-top: 1.5rem;
+
+        h3 {
+          margin-bottom: 1rem;
+          font-size: 1.3rem;
+          color: #333;
         }
+
+        .video-container {
+          margin-bottom: 1rem;
+
+          .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+
+            img {
+              width: 100%;
+              border-radius: 10px;
+              transition: transform 0.3s;
+            }
+
+            &:hover img {
+              transform: scale(1.02);
+            }
+
+            .play-icon {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background: rgba(0, 0, 0, 0.5);
+              border-radius: 50%;
+              padding: 1rem;
+
+              i {
+                font-size: 1.5rem;
+                color: #fff;
+              }
+            }
+          }
+
+          .hero-video {
+            width: 100%;
+            border-radius: 10px;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .trip-main-details {
+      flex: 1 1 45%;
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #222;
+        margin-bottom: 0.5rem;
       }
 
       .trip-meta {
         display: flex;
         justify-content: space-between;
-        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        gap: 1rem;
 
         .meta-info {
-          text-align: center;
+          flex: 1;
 
-          h3 {
-            margin: 0;
+          h4 {
+            margin-bottom: 0.2rem;
             font-size: 1rem;
-            color: $secondary-color;
+            color: #666;
           }
 
           p {
-            margin: 0.25rem 0 0;
-            font-size: 1.25rem;
             font-weight: bold;
+            color: #333;
           }
         }
       }
 
-      .trip-description,
-      .trip-rating {
-        margin-top: 1.5rem;
+      .trip-description {
+        margin-bottom: 1.5rem;
 
-        h2 {
-          margin: 0;
-          color: $primary-color;
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
         }
 
         p {
-          margin: 0.5rem 0 0;
+          color: #555;
+          line-height: 1.6;
+        }
+      }
+
+      .destination-visual {
+        padding: 1rem;
+        border: 1px dashed #bce3f8;
+        background: #f0faff;
+        border-radius: 1rem;
+        margin-bottom: 1.5rem;
+
+        .path-line {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.6rem;
+
+          .location {
+            background-color: #e3f4ff;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+            color: #0077b6;
+
+            i {
+              color: #00b4d8;
+            }
+          }
+        }
+      }
+
+      .trip-rating {
+        margin-bottom: 1.5rem;
+
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
         }
       }
 
       .footer {
-        margin-top: 2rem;
-        text-align: center;
-
-        button {
-          font-size: 1.2rem;
-          padding: 0.8rem 2rem;
-        }
+        text-align: right;
       }
-    }
-  }
-
-  .trip-destination {
-    margin-top: 1.5rem;
-
-    h2 {
-      margin: 0;
-      color: $primary-color;
-    }
-
-    p {
-      margin: 0.5rem 0 0;
-      font-size: 1.2rem;
     }
   }
 
   .reviews-section {
-    margin-top: 3rem;
-
     h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: $primary-color;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: #333;
     }
 
     .reviews-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1.5rem;
 
       .review-card {
-        background: white;
-        border-radius: $border-radius;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 1.5rem;
+        background: #fff;
+        padding: 1.2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 
         .user-info {
-          margin-bottom: 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
 
           h3 {
+            font-size: 1rem;
             margin: 0;
-            font-size: 1.2rem;
+            color: #222;
           }
 
           small {
-            color: $secondary-color;
+            color: #888;
           }
         }
 
         .review-comment {
-          margin-top: 1rem;
-          font-size: 1rem;
-          color: $text-color;
-        }
-      }
-    }
-  }
-
-  .video-section {
-    margin-top: 2rem;
-
-    .video-container {
-      position: relative;
-      margin-bottom: 1.5rem;
-      width: 100%;
-      height: 300px;
-      border-radius: $border-radius;
-      overflow: hidden;
-
-      .video-thumbnail {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        display: block;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: $border-radius;
-        }
-
-        .play-icon {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 3rem;
-          color: white;
-          background: rgba(0, 0, 0, 0.6);
-          border-radius: 50%;
-          padding: 1rem;
-          transition: all 0.3s ease;
-
-          &:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            background: rgba(0, 0, 0, 0.8);
-          }
-        }
-
-        &:hover {
-          .play-icon {
-            background: rgba(0, 0, 0, 0.8);
-          }
-        }
-      }
-
-      .hero-video {
-        width: 100%;
-        height: 100%;
-        border-radius: $border-radius;
-        display: block;
-        object-fit: cover;
-      }
-    }
-
-    .video-thumbnails {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-
-      .video-thumbnail {
-        position: relative;
-        cursor: pointer;
-        width: 150px;
-        height: 100px;
-        border-radius: $border-radius;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 2px solid transparent;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        &:hover {
-          transform: scale(1.05);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        &.active {
-          border-color: $primary-color;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .play-icon {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 1.5rem;
-          color: white;
-          background: rgba(0, 0, 0, 0.6);
-          border-radius: 50%;
-          padding: 0.5rem;
-        }
-      }
-    }
-
-    .video-description {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      color: $secondary-color;
-    }
-  }
-}
-
-// Responsive Design
-@media (max-width: 768px) {
-  .trip-details-container {
-    padding: 1rem;
-
-    .trip-meta {
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .trip-info-card {
-      .footer {
-        button {
-          width: 100%;
+          margin-top: 0.8rem;
+          font-style: italic;
+          color: #555;
         }
       }
     }
   }
 }
 
-// Trip Not Found Section
-.trip-not-found {
+.hero-video-section {
+  margin-top: 3rem;
+  position: relative;
   text-align: center;
-  margin-top: 5rem;
 
+  .video-banner {
+    position: relative;
+    cursor: pointer;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    max-width: 50%;
+    margin: 0 auto;
+
+    .video-poster {
+      width: 100%;
+      height: 200px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .play-btn {
+        top: 50%;
+        font-size: 3rem;
+        color: #fff;
+        background: #10b981;
+        border-radius: 50%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        /* top: 50%; */
+        /* margin: auto; */
+        top: 20%;
+        bottom: 0;
+      }
+
+      .caption {
+        color: white;
+        font-size: 1.4rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .popup-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+
+    .video-wrapper {
+      position: relative;
+      width: 80%;
+      max-width: 900px;
+
+      video {
+        width: 100%;
+        border-radius: 10px;
+        outline: none;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        background: white;
+        color: #333;
+        font-size: 2rem;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.destination-path-section {
+  margin: 3rem 0;
+  background-color: #fdfdfd;
+  border-radius: 1rem;
+  padding: 2rem;
+  position: relative;
+
+  .curved-path {
+    border: 2px dashed #00b4d8;
+    border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
+    height: 250px;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .city {
+    position: absolute;
+    background-color: #e3f4ff;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #0077b6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+  }
+
+  .destination-text {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #222;
+    }
+
+    p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+.destination-curve-container {
+  margin: 4rem 0;
+  text-align: center;
+}
+
+.curve-svg {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+}
+
+.location-label {
+  font-size: 0.9rem;
+  fill: #333;
+  font-weight: bold;
+}
+
+.destination-curve-container {
+  margin: 4rem 0;
+  text-align: center;
+  background: #f6fbff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.safari-banner {
+  margin-bottom: 2rem;
   h2 {
-    color: $secondary-color;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
   }
+}
 
-  p {
-    color: $text-color;
-  }
+.curve-svg {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+}
+
+.location-label {
+  font-size: 0.85rem;
+  fill: #333;
+  font-weight: bold;
 }
