@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mountain terrain -->
+  <path d="M0 45 L40 15 L80 45 L120 25 L160 45 L200 30 L200 60 L0 60 Z" fill="#ff9800" opacity="0.8"/>
+  
+  <!-- Bike and rider silhouette -->
+  <g transform="translate(130, 30) scale(0.2)">
+    <!-- Bike frame -->
+    <path d="M50 80 L90 40 L130 80 L90 80 Z" fill="#333333" stroke="#333333" stroke-width="3"/>
+    <!-- Wheels -->
+    <circle cx="50" cy="80" r="20" fill="none" stroke="#333333" stroke-width="6"/>
+    <circle cx="130" cy="80" r="20" fill="none" stroke="#333333" stroke-width="6"/>
+    <!-- Rider -->
+    <path d="M90 20 C85 25, 95 35, 90 40 L85 60" fill="none" stroke="#333333" stroke-width="6"/>
+  </g>
+  
+  <!-- Text elements with adventure style -->
+  <text x="20" y="35" font-family="Arial" font-size="24" font-weight="bold" fill="#333333">Adventure</text>
+  <text x="105" y="35" font-family="Arial" font-size="24" font-weight="bold" fill="#ff9800">Bikes</text>
+</svg>

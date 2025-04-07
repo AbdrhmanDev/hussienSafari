@@ -1,0 +1,18 @@
+<div class="navbar-container">
+  <p-menubar [model]="menuItems" class="sticky-navbar">
+    <ng-template pTemplate="start">
+      <img src="logopng.png" class="navbar-logo" />
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="navbar-buttons">
+        <i class="pi pi-user user-icon"></i>
+        <button
+          pButton
+          label="Sign Up"
+          class="p-button-outlined p-button-warning mr-2"
+        ></button>
+        <button pButton label="Login" class="p-button-warning"></button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>
