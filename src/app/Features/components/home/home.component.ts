@@ -14,9 +14,9 @@ import { TripsService, Trip } from '../../services/trips.service';
 })
 export class HomeComponent implements OnInit {
   sliderImages: string[] = [
-    '/sliderimages/image1.jpg',
-    '/sliderimages/image2.jpg',
-    '/sliderimages/image3.jpg',
+    'assets/sliderimages/image1.jpg',
+    'assets/sliderimages/image2.jpg',
+    'assets/sliderimages/image3.jpg',
   ];
 
   featuredTours: Trip[] = [];

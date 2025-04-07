@@ -151,7 +151,7 @@ export class TripDetailsComponent implements OnInit {
 
   getVideoThumbnail(videoUrl: string): string {
     // Ensure the thumbnail path is correct
-    const basePath = 'videos/'; // Adjust this path to match your project structure
+    const basePath = 'assets/videos/'; // Adjust this path to match your project structure
     const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '.jpg');
     return `${basePath}${videoFileName}`;
   }

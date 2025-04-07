@@ -40,7 +40,7 @@ export class TripsService {
         "Experience the great migration and witness Africa's most spectacular wildlife in their natural habitat.",
       price: 2499,
       pricePerPerson: 625,
-      image: 'sliderimages/image1.jpg', // Updated to public folder
+      image: 'assets/sliderimages/image1.jpg', // Updated to public folder
       duration: '7 days',
       location: 'Serengeti National Park',
       groupSize: '4-12 people',
@@ -55,9 +55,9 @@ export class TripsService {
       category: 'Wildlife',
       destination: 'Tanzania',
       media: [
-        { type: 'image', url: 'sliderimages/image1.jpg' }, // Updated
-        { type: 'image', url: 'sliderimages/image2.jpg' }, // Updated
-        { type: 'video', url: 'videos/vid.mp4' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image1.jpg' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image2.jpg' }, // Updated
+        { type: 'video', url: 'assets/videos/vid.mp4' }, // Updated
       ],
     },
     {
@@ -67,7 +67,7 @@ export class TripsService {
         'Explore the iconic Masai Mara and interact with local Masai communities while spotting the Big Five.',
       price: 1999,
       pricePerPerson: 500,
-      image: 'sliderimages/image1.jpg', // Updated to public folder
+      image: 'assets/sliderimages/image1.jpg', // Updated to public folder
       duration: '5 days',
       location: 'Masai Mara Reserve',
       groupSize: '6-10 people',
@@ -82,8 +82,8 @@ export class TripsService {
       category: 'Adventure',
       destination: 'Kenya',
       media: [
-        { type: 'image', url: 'sliderimages/image3.jpg' }, // Updated
-        { type: 'video', url: 'videos/vid.mp4' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image3.jpg' }, // Updated
+        { type: 'video', url: 'assets/videos/vid.mp4' }, // Updated
       ],
     },
     {
@@ -93,7 +93,7 @@ export class TripsService {
         "Discover the world's largest intact volcanic caldera and its diverse wildlife ecosystem.",
       price: 2199,
       pricePerPerson: 550,
-      image: 'sliderimages/image1.jpg', // Updated to public folder
+      image: 'assets/sliderimages/image1.jpg', // Updated to public folder
       duration: '4 days',
       location: 'Ngorongoro Conservation Area',
       groupSize: '4-8 people',
@@ -108,8 +108,8 @@ export class TripsService {
       category: 'Safari',
       destination: 'Tanzania',
       media: [
-        { type: 'image', url: 'sliderimages/image3.jpg' }, // Updated
-        { type: 'video', url: 'videos/vid.mp4' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image3.jpg' }, // Updated
+        { type: 'video', url: 'assets/videos/vid.mp4' }, // Updated
       ],
     },
     {
@@ -119,7 +119,7 @@ export class TripsService {
         'Navigate through the waterways of the Okavango Delta and camp under the African stars.',
       price: 3299,
       pricePerPerson: 825,
-      image: 'sliderimages/image2.jpg', // Updated to public folder
+      image: 'assets/sliderimages/image2.jpg', // Updated to public folder
       duration: '8 days',
       location: 'Okavango Delta',
       groupSize: '4-8 people',
@@ -134,8 +134,8 @@ export class TripsService {
       category: 'Expedition',
       destination: 'Botswana',
       media: [
-        { type: 'image', url: 'sliderimages/image3.jpg' }, // Updated
-        { type: 'video', url: 'videos/vid.mp4' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image3.jpg' }, // Updated
+        { type: 'video', url: 'assets/videos/vid.mp4' }, // Updated
       ],
     },
     {
@@ -145,7 +145,7 @@ export class TripsService {
         "Experience South Africa's premier wildlife destination with luxury lodging and expert guides.",
       price: 2799,
       pricePerPerson: 700,
-      image: 'sliderimages/image3.jpg', // Updated to public folder
+      image: 'assets/sliderimages/image3.jpg', // Updated to public folder
       duration: '6 days',
       location: 'Kruger National Park',
       groupSize: '2-8 people',
@@ -160,8 +160,8 @@ export class TripsService {
       category: 'Luxury',
       destination: 'South Africa',
       media: [
-        { type: 'image', url: 'sliderimages/image3.jpg' }, // Updated
-        { type: 'video', url: 'videos/vid.mp4' }, // Updated
+        { type: 'image', url: 'assets/sliderimages/image3.jpg' }, // Updated
+        { type: 'video', url: 'assets/videos/vid.mp4' }, // Updated
       ],
     },
   ];
