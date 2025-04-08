@@ -41,6 +41,10 @@
         onerror="this.src='/assets/trips/placeholder.svg'"
       />
       <div class="tour-info">
+        <div class="rating">
+          <i class="pi pi-star-fill" [style.color]="'#ffd700'"></i>
+          <span>{{ tour.rating }} ({{ tour.reviewCount }} reviews)</span>
+        </div>
         <h3>{{ tour.title }}</h3>
         <p>{{ tour.description }}</p>
         <div class="trip-details">
@@ -57,10 +61,7 @@
             <span>{{ tour.groupSize }}</span>
           </div>
         </div>
-        <div class="rating">
-          <i class="pi pi-star-fill" [style.color]="'#ffd700'"></i>
-          <span>{{ tour.rating }} ({{ tour.reviewCount }} reviews)</span>
-        </div>
+     
         <div class="tour-footer">
           <span class="price">From ${{ tour.price }}</span>
           <button
