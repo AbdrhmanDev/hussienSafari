@@ -1,13 +1,6 @@
 <div class="layout">
-    <!-- ✅ Sidebar ثابت -->
-    <div class="sidebar">
-      <h3>🧭 التحكم</h3>
-      <ul>
-        <li><button pButton class="w-full mb-2" label="Add Trip"></button></li>
-        <li><button pButton class="w-full mb-2" label="All Trips"></button></li>
-        <li><button pButton class="w-full mb-2" label="Bookings"></button></li>
-      </ul>
-    </div>
+    <app-sidebar></app-sidebar>
+
 <div class="add-trip-wrapper">
     <form [formGroup]="tripForm">
         <!-- Stepper Navigation -->

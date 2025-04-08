@@ -24,6 +24,7 @@ import { Textarea } from 'primeng/textarea';
 import { DatePicker } from 'primeng/datepicker';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUpload } from 'primeng/fileupload';
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-add-trip',
@@ -47,7 +48,8 @@ import { FileUpload } from 'primeng/fileupload';
     Textarea,
     DatePicker,
     FieldsetModule,
-  ],
+    SidebarComponent
+],
 })
 export class AddTripComponent {
   tripForm: FormGroup;

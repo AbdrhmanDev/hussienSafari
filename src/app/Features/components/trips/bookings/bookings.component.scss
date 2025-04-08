@@ -1,0 +1,11 @@
+.bookings-wrapper {
+    padding: 2rem;
+
+    h2 {
+        margin: 0;
+    }
+
+    ::ng-deep .p-tag {
+        text-transform: capitalize;
+    }
+}

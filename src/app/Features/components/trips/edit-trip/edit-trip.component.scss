@@ -1,0 +1,56 @@
+// ==========================
+// Layout Structure
+// ==========================
+.layout {
+    display: flex;
+    min-height: 100vh;
+  
+    app-sidebar {
+      width: 250px;
+      flex-shrink: 0;
+      background: #f9f9f9;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  
+    .main-content,
+    .add-trip-wrapper {
+      flex: 1;
+      margin-left: 250px; // نفس عرض السايدبار
+      padding: 2rem;
+      background: #fefefe;
+  
+      @media (max-width: 768px) {
+        margin-left: 0;
+      }
+    }
+  }
+  
+  // ==========================
+  // Trip Form Styling
+  // ==========================
+  .add-trip-wrapper {
+    .p-fieldset {
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+    }
+  
+    .field {
+      margin-bottom: 2rem;
+    }
+  
+    .p-card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+    }
+  
+    .media-preview img,
+    .media-preview video {
+      border-radius: 8px;
+    }
+  }
