@@ -24,7 +24,7 @@ import { Textarea } from 'primeng/textarea';
 import { DatePicker } from 'primeng/datepicker';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUpload } from 'primeng/fileupload';
-import { SidebarComponent } from "../sidebar/sidebar.component";
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-add-trip',
@@ -48,8 +48,8 @@ import { SidebarComponent } from "../sidebar/sidebar.component";
     Textarea,
     DatePicker,
     FieldsetModule,
-    SidebarComponent
-],
+    SidebarComponent,
+  ],
 })
 export class AddTripComponent {
   tripForm: FormGroup;
@@ -199,5 +199,11 @@ export class AddTripComponent {
     const updated = [...this.tripForm.value.exclusions];
     updated.splice(index, 1);
     this.tripForm.patchValue({ exclusions: updated });
+  }
+  isSidebarActive: boolean = false;
+
+  toggleSidebar() {
+    const sidebarEl = document.querySelector('app-sidebar');
+    sidebarEl?.classList.toggle('active');
   }
 }

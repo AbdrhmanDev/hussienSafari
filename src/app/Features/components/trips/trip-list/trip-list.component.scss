@@ -1,8 +1,9 @@
 .layout {
     display: flex;
-}
-
-app-sidebar {
+    flex-direction: row;
+  }
+  
+  app-sidebar {
     width: 250px;
     position: fixed;
     height: 100vh;
@@ -11,17 +12,44 @@ app-sidebar {
     top: 0;
     left: 0;
     z-index: 100;
-}
-
-.main-content {
-    margin-left: 290px; // ضروري يساوي عرض السايدبار
+  
+    @media (max-width: 768px) {
+      position: absolute;
+      left: -250px;
+      transition: left 0.3s ease-in-out;
+      &.active {
+        left: 0;
+      }
+    }
+  }
+  
+  .hamburger-btn {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 200;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+  
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+  
+  .main-content {
+    margin-left: 250px;
     padding: 2rem;
     width: calc(100% - 250px);
     background: #fff;
     min-height: 100vh;
-
+    transition: margin-left 0.3s ease-in-out;
+  
     @media (max-width: 768px) {
-        margin-left: 0;
-        width: 100%;
+      margin-left: 0;
+      width: 100%;
+      padding: 1.5rem;
     }
-}
+  }
+  

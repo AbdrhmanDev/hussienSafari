@@ -98,4 +98,11 @@ export class TripListComponent implements OnInit {
     this.selectedTrip = trip;
     this.showDetails = true;
   }
+  isSidebarActive: boolean = false;
+
+toggleSidebar() {
+  const sidebarEl = document.querySelector('app-sidebar');
+  sidebarEl?.classList.toggle('active');
+}
+
 }

@@ -1,23 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarModule } from 'primeng/sidebar';
+import { Component, OnInit, Input } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
-import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
+  imports: [PanelMenuModule, RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  imports: [
-    SidebarModule,
-    PanelMenuModule,
-    ButtonModule,
-    RouterModule,
-  ],
 })
 export class SidebarComponent implements OnInit {
-  visibleSidebar = false;
+  @Input() visible: boolean = true;
+
   items: any[] = [];
 
   ngOnInit() {

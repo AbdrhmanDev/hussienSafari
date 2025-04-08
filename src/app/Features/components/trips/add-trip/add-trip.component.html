@@ -1,6 +1,8 @@
 <div class="layout">
     <app-sidebar></app-sidebar>
-
+    <button class="hamburger-btn" (click)="toggleSidebar()">
+        <i class="pi pi-bars"></i>
+      </button>
 <div class="add-trip-wrapper">
     <form [formGroup]="tripForm">
         <!-- Stepper Navigation -->

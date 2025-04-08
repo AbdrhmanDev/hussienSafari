@@ -1,11 +1,40 @@
-.bookings-wrapper {
+.layout {
+    display: flex;
+    flex-wrap: nowrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.sidebar-wrapper {
+    width: 250px;
+    flex-shrink: 0;
+    background-color: #f8f9fa;
+    height: 100vh;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+.main-content {
+    margin-left: 290px; // ضروري يساوي عرض السايدبار
+
+    flex: 1;
     padding: 2rem;
+    overflow-x: hidden;
+    background-color: #fff;
 
-    h2 {
-        margin: 0;
+    @media (max-width: 768px) {
+        padding: 1rem;
+        margin-left: 0;
     }
+}
 
-    ::ng-deep .p-tag {
-        text-transform: capitalize;
-    }
+.p-table {
+    font-size: 0.9rem;
 }
