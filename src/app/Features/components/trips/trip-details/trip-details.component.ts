@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { ActivatedRoute } from '@angular/router';
 import { Trip, TripsService } from '../../../services/trips.service';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 interface Review {
   userName: string;
@@ -27,6 +29,8 @@ interface Review {
     RatingModule,
     FormsModule,
     TagModule,
+    CalendarModule,
+    InputNumberModule,
   ],
   templateUrl: './trip-details.component.html',
   styleUrls: ['./trip-details.component.scss'],
@@ -36,19 +40,23 @@ export class TripDetailsComponent implements OnInit {
   images: { type: 'image'; url: string }[] = []; // Array for images
   videos: { type: 'video'; url: string }[] = []; // Array for videos
   activeVideo: string | null = null; // Track the currently playing video
+  currentIndex = 0;
 
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
-      numVisible: 5,
+      numVisible: 4,
+      thumbnailsPosition: 'left',
     },
     {
       breakpoint: '768px',
       numVisible: 3,
+      thumbnailsPosition: 'bottom',
     },
     {
       breakpoint: '560px',
       numVisible: 1,
+      thumbnailsPosition: 'bottom',
     },
   ];
 
@@ -154,5 +162,21 @@ export class TripDetailsComponent implements OnInit {
     const basePath = 'assets/videos/'; // Adjust this path to match your project structure
     const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '.jpg');
     return `${basePath}${videoFileName}`;
+  }
+
+  setActiveImage(index: number) {
+    this.currentIndex = index;
+  }
+
+  prevImage() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
+  nextImage() {
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+    }
   }
 }
