@@ -8,5 +8,6 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'details/:id', component: TripDetailsComponent },
+
   { path: '**', redirectTo: '' }, // Default route
 ];
