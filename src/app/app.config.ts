@@ -14,7 +14,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
         providePrimeNG({ 
             theme: {
-                preset: Aura
+                preset: Aura,
+                options: {
+                  tokens: {
+                    primaryColor: '#00BFA5', // ← Your custom primary color
+                    primaryTextColor: '#ffffff'
+                  }
+                }
             }
         })
   ],

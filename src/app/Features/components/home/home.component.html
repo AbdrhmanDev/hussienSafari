@@ -30,7 +30,11 @@
 <div class="featured-tours">
   <h2>Popular Safari Tours</h2>
   <div class="tour-grid">
-    <div class="tour-card" *ngFor="let tour of featuredTours">
+    <div class="tour-card" *ngFor="let tour of featuredTours; let i = index">
+      <div class="ribbon">
+        <span>#{{ i + 1 }}</span>
+        <div class="shine"></div>
+      </div>
       <img
         [src]="tour.image"
         [alt]="tour.title"
