@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Trip, TripsService } from '../../../services/trips.service';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 interface Review {
   userName: string;
@@ -31,6 +32,7 @@ interface Review {
     TagModule,
     CalendarModule,
     InputNumberModule,
+    OverlayPanelModule,
   ],
   templateUrl: './trip-details.component.html',
   styleUrls: ['./trip-details.component.scss'],
@@ -90,6 +92,15 @@ export class TripDetailsComponent implements OnInit {
         'Wonderful adventure with great attention to detail. Would highly recommend!',
     },
   ];
+
+  selectedDate: Date = new Date();
+  minDate: Date = new Date();
+  adults: number = 2;
+  children: number = 0;
+
+  get totalTravelers(): number {
+    return this.adults + this.children;
+  }
 
   constructor(
     private route: ActivatedRoute,

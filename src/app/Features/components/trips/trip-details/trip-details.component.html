@@ -1,7 +1,5 @@
 <!-- trip-details.component.html -->
 <div class="trip-details-container">
-
-
   <h1 class="trip-title">
     {{
       trip?.title ||
@@ -9,9 +7,7 @@
     }}
   </h1>
   <div class="breadcrumb-container">
-    <div class="breadcrumb-path">
-     
-    </div>
+    <div class="breadcrumb-path"></div>
     <div class="contact-info">
       <span
         ><i class="pi pi-phone"></i> Book online or call: +1(702) 648-5873</span
@@ -91,12 +87,12 @@
             </ul>
           </div>
 
-          <div class="trip-description">
+          <!-- <div class="trip-description">
             <h3>Description</h3>
             <p>{{ trip?.description }}</p>
-          </div>
+          </div> -->
 
-          <div class="destination-curve-container">
+          <!-- <div class="destination-curve-container">
             <div class="safari-banner">
               <h2>انطلق في مغامرتك في جبال البحر الأحمر!</h2>
               <button
@@ -145,7 +141,7 @@
               <circle cx="950" cy="150" r="8" fill="#0077b6" />
               <text x="930" y="140" class="location-label">النهاية</text>
             </svg>
-          </div>
+          </div> -->
 
           <div class="trip-meta">
             <div class="meta-info">
@@ -201,16 +197,54 @@
 
             <div class="form-group">
               <label><i class="pi pi-calendar"></i> Date</label>
-              <div class="date-picker">
-                <span>Wednesday, Apr 10, 2025</span>
-              </div>
+              <p-calendar
+                [(ngModel)]="selectedDate"
+                [minDate]="minDate"
+                [showIcon]="true"
+                dateFormat="dd/mm/yy"
+                [readonlyInput]="true"
+                styleClass="w-full"
+              >
+              </p-calendar>
             </div>
 
             <div class="form-group">
               <label><i class="pi pi-users"></i> Travelers</label>
-              <div class="travelers-picker">
-                <span>2 Adults</span>
+              <div class="travelers-picker" (click)="op.toggle($event)">
+                <span
+                  >{{ totalTravelers }} Travelers ({{ adults }} Adults,
+                  {{ children }} Children)</span
+                >
               </div>
+
+              <p-overlayPanel #op>
+                <div class="travelers-selector">
+                  <div class="traveler-type">
+                    <div class="type-label">
+                      <span>Adults</span>
+                      <small>Age 13+</small>
+                    </div>
+                    <p-inputNumber
+                      [(ngModel)]="adults"
+                      [showButtons]="true"
+                      [min]="1"
+                      [max]="10"
+                    ></p-inputNumber>
+                  </div>
+                  <div class="traveler-type">
+                    <div class="type-label">
+                      <span>Children</span>
+                      <small>Age 2-12</small>
+                    </div>
+                    <p-inputNumber
+                      [(ngModel)]="children"
+                      [showButtons]="true"
+                      [min]="0"
+                      [max]="10"
+                    ></p-inputNumber>
+                  </div>
+                </div>
+              </p-overlayPanel>
             </div>
 
             <button
@@ -231,10 +265,7 @@
               <i class="pi pi-check-circle"></i> Reserve Now and Pay Later
               <span>Secure your spot while staying flexible</span>
             </div>
-            <div class="feature">
-              <i class="pi pi-calendar-check"></i> Book ahead!
-              <span>On average, this is booked 45 days in advance.</span>
-            </div>
+           
           </div>
         </div>
       </div>
