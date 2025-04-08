@@ -1,4 +1,8 @@
 /* Custom styles for the sticky navbar and responsive design */
+@import "primeflex/primeflex.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.min.css";
+
 .sticky-navbar {
   position: sticky;
   top: 0;
@@ -47,7 +51,8 @@
 
 .slider .slide img {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
+  height: auto;
+  /* Maintain aspect ratio */
   object-fit: cover;
   object-position: center;
 }
