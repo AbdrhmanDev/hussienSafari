@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 
 export interface ReviewPhoto {
   id: number;
@@ -17,9 +17,10 @@ export interface Review {
   userAvatar?: string;
   date: string;
   rating: number;
-  comment: string;
+  comment?: string;
   helpful: number;
   notHelpful: number;
+  userVote?: 'helpful' | 'not-helpful';
   photos?: ReviewPhoto[];
 }
 
@@ -174,10 +175,18 @@ export class ReviewsService {
     },
   ];
 
-  constructor() {}
+  constructor() {
+    this.initializeStorage();
+  }
+
+  private initializeStorage(): void {
+    if (!localStorage.getItem('reviews')) {
+      localStorage.setItem('reviews', JSON.stringify(this.mockReviews));
+    }
+  }
 
   getReviewsByTripId(tripId: number): Observable<Review[]> {
-    const reviews = this.mockReviews.filter(
+    const reviews = this.getStoredReviews().filter(
       (review) => review.tripId === tripId
     );
     return of(reviews);
@@ -185,7 +194,7 @@ export class ReviewsService {
 
   getAllTravelerPhotos(tripId: number): Observable<ReviewPhoto[]> {
     const photos: ReviewPhoto[] = [];
-    this.mockReviews
+    this.getStoredReviews()
       .filter((review) => review.tripId === tripId && review.photos)
       .forEach((review) => {
         if (review.photos) {
@@ -196,7 +205,7 @@ export class ReviewsService {
   }
 
   getRatingDistribution(tripId: number): Observable<RatingDistribution[]> {
-    const reviews = this.mockReviews.filter(
+    const reviews = this.getStoredReviews().filter(
       (review) => review.tripId === tripId
     );
     const totalReviews = reviews.length;
@@ -228,7 +237,7 @@ export class ReviewsService {
   }
 
   getAverageRating(tripId: number): Observable<number> {
-    const reviews = this.mockReviews.filter(
+    const reviews = this.getStoredReviews().filter(
       (review) => review.tripId === tripId
     );
     if (reviews.length === 0) return of(0);
@@ -238,65 +247,67 @@ export class ReviewsService {
   }
 
   markReviewHelpful(reviewId: number, helpful: boolean): Observable<boolean> {
-    const reviewIndex = this.mockReviews.findIndex((r) => r.id === reviewId);
+    const reviews = this.getStoredReviews();
+    const reviewIndex = reviews.findIndex((r) => r.id === reviewId);
     if (reviewIndex === -1) return of(false);
 
     if (helpful) {
-      this.mockReviews[reviewIndex].helpful++;
+      reviews[reviewIndex].helpful++;
     } else {
-      this.mockReviews[reviewIndex].notHelpful++;
+      reviews[reviewIndex].notHelpful++;
     }
 
+    localStorage.setItem('reviews', JSON.stringify(reviews));
     return of(true);
   }
 
   addReview(
-    review: Omit<Review, 'id' | 'helpful' | 'notHelpful'>
+    reviewData: Omit<Review, 'id' | 'helpful' | 'notHelpful'>
   ): Observable<Review> {
-    // Generate a new ID (highest ID + 1)
-    const newId = Math.max(...this.mockReviews.map((r) => r.id), 0) + 1;
-
-    // Create the new review object
     const newReview: Review = {
-      ...review,
-      id: newId,
+      id: Date.now(),
       helpful: 0,
       notHelpful: 0,
-      date: new Date().toISOString().split('T')[0], // Format as YYYY-MM-DD
+      userVote: undefined,
+      photos: [],
+      ...reviewData,
+      date: new Date().toISOString(), // Add current date
     };
 
-    // Add to the mock reviews array
-    this.mockReviews.push(newReview);
+    const reviews = [...this.mockReviews]; // Create new array
+    reviews.unshift(newReview);
+    this.mockReviews = reviews; // Update mock reviews
+    localStorage.setItem('reviews', JSON.stringify(reviews));
 
     return of(newReview);
   }
 
   addReviewPhoto(
-    reviewId: number,
-    photo: Omit<ReviewPhoto, 'id'>
+    reviewId: number | string,
+    photoData: Omit<ReviewPhoto, 'id'>
   ): Observable<ReviewPhoto> {
-    const reviewIndex = this.mockReviews.findIndex((r) => r.id === reviewId);
-    if (reviewIndex === -1) return of(null as unknown as ReviewPhoto);
-
-    // Initialize photos array if it doesn't exist
-    if (!this.mockReviews[reviewIndex].photos) {
-      this.mockReviews[reviewIndex].photos = [];
-    }
-
-    // Generate a new photo ID
-    const newPhotoId = this.mockReviews[reviewIndex].photos?.length
-      ? Math.max(...this.mockReviews[reviewIndex].photos!.map((p) => p.id), 0) +
-        1
-      : 1;
-
     const newPhoto: ReviewPhoto = {
-      ...photo,
-      id: newPhotoId,
+      id: Date.now(),
+      ...photoData,
     };
 
-    // Add the photo to the review
-    this.mockReviews[reviewIndex].photos!.push(newPhoto);
+    const reviews = [...this.mockReviews];
+    const reviewIndex = reviews.findIndex((r) => r.id === reviewId);
+
+    if (reviewIndex !== -1) {
+      reviews[reviewIndex].photos = [
+        ...(reviews[reviewIndex].photos || []),
+        newPhoto,
+      ];
+      this.mockReviews = reviews;
+      localStorage.setItem('reviews', JSON.stringify(reviews));
+    }
 
     return of(newPhoto);
+  }
+
+  private getStoredReviews(): Review[] {
+    const storedReviews = localStorage.getItem('reviews');
+    return storedReviews ? JSON.parse(storedReviews) : [];
   }
 }

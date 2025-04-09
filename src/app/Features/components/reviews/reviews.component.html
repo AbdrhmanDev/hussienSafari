@@ -45,7 +45,7 @@
   </div>
 
   <div class="traveler-photos-section" *ngIf="travelerPhotos.length > 0">
-    <h3>Traveler Photos</h3>
+    <h3>Memories from Our Travelers</h3>
     <div class="photos-masonry">
       <div *ngFor="let photo of travelerPhotos" class="photo-item">
         <img
@@ -61,7 +61,11 @@
   </div>
 
   <div class="reviews-container">
-    <div *ngFor="let review of reviews" class="review-card">
+    <div
+      *ngFor="let review of reviews"
+      class="review-card"
+      [attr.data-rating]="review.rating"
+    >
       <div class="review-header">
         <div class="user-info">
           <img
@@ -75,28 +79,40 @@
               <span class="review-date">{{
                 review.date | date : "mediumDate"
               }}</span>
-              <span class="review-trip" *ngIf="review.tripId"
-                >Verified Purchase</span
-              >
+              <span class="verified-badge" *ngIf="review.tripId">
+                <i class="pi pi-check-circle"></i>
+                Verified Purchase
+              </span>
             </div>
           </div>
         </div>
-        <p-rating [ngModel]="review.rating" [readonly]="true"></p-rating>
+        <div class="rating-container">
+          <p-rating [ngModel]="review.rating" [readonly]="true"></p-rating>
+          <span class="rating-date">{{ review.date | date : "MMM d, y" }}</span>
+        </div>
       </div>
 
       <div class="review-content">
         <p class="review-comment">{{ review.comment }}</p>
 
-        <div
-          class="review-photos"
-          *ngIf="review.photos && review.photos.length > 0"
-        >
-          <div *ngFor="let photo of review.photos" class="review-photo">
-            <img
-              [src]="photo.url"
-              [alt]="photo.caption || 'Review photo'"
+        <div class="review-photos" *ngIf="review?.photos?.length ?? 0 > 0">
+          <div class="photos-grid">
+            <div
+              *ngFor="let photo of (review.photos ?? []).slice(0, 3); let i = index"
+              class="photo-item"
               (click)="openPhotoViewer(photo)"
-            />
+            >
+              <img [src]="photo.url" [alt]="photo.caption || 'Review photo'" />
+              <div class="photo-overlay">
+                <i class="pi pi-eye"></i>
+              </div>
+              <span
+                *ngIf="i === 2 && (review.photos?.length ?? 0) > 3"
+                class="more-photos"
+              >
+                +{{ (review.photos?.length ?? 0) - 3 }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -106,16 +122,20 @@
           <span>Was this review helpful?</span>
           <button
             pButton
+            [class.voted]="review.userVote === 'helpful'"
+            [disabled]="review.userVote === 'helpful'"
             icon="pi pi-thumbs-up"
-            label="Yes ({{ review.helpful }})"
+            [label]="'Yes (' + (review.helpful || 0) + ')'"
             class="p-button-outlined p-button-sm"
             (click)="markHelpful(review.id, true)"
           ></button>
           <button
             pButton
+            [class.voted]="review.userVote === 'not-helpful'"
+            [disabled]="review.userVote === 'not-helpful'"
             icon="pi pi-thumbs-down"
-            label="No ({{ review.notHelpful }})"
-            class="p-button-outlined p-button-sm"
+            [label]="'No (' + (review.notHelpful || 0) + ')'"
+            class="p-button-outlined p-button-sm p-button-danger"
             (click)="markHelpful(review.id, false)"
           ></button>
         </div>

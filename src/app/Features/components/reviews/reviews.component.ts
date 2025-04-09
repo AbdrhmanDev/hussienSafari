@@ -5,12 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import {
-  Review,
   ReviewPhoto,
   RatingDistribution,
   ReviewsService,
+  Review,
 } from '../../services/reviews.service';
 import { AddReviewsComponent } from './add-reviews/add-reviews.component';
+import { GalleriaModule } from 'primeng/galleria';
 
 @Component({
   selector: 'app-reviews',
@@ -22,6 +23,7 @@ import { AddReviewsComponent } from './add-reviews/add-reviews.component';
     ButtonModule,
     DropdownModule,
     AddReviewsComponent,
+    GalleriaModule,
   ],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.scss',
@@ -63,6 +65,21 @@ export class ReviewsComponent implements OnInit {
     { label: 'Friends', value: 'friends' },
   ];
 
+  galleriaResponsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ];
+
   constructor(private reviewsService: ReviewsService) {}
 
   ngOnInit(): void {
@@ -72,26 +89,19 @@ export class ReviewsComponent implements OnInit {
   }
 
   loadReviews(): void {
-    // Get reviews for this trip
     this.reviewsService.getReviewsByTripId(this.tripId).subscribe((reviews) => {
       this.reviews = reviews;
+      this.updateRatings();
     });
+  }
 
-    // Get traveler photos
-    this.reviewsService
-      .getAllTravelerPhotos(this.tripId)
-      .subscribe((photos) => {
-        this.travelerPhotos = photos;
-      });
-
-    // Get rating distribution
+  private updateRatings(): void {
     this.reviewsService
       .getRatingDistribution(this.tripId)
       .subscribe((distribution) => {
         this.ratingDistribution = distribution;
       });
 
-    // Get average rating
     this.reviewsService.getAverageRating(this.tripId).subscribe((rating) => {
       this.averageRating = rating;
     });
@@ -108,23 +118,18 @@ export class ReviewsComponent implements OnInit {
   }
 
   // Handle new review added
-  onReviewAdded(review: Review): void {
-    // Add the new review to the list
-    this.reviews.unshift(review);
+  onReviewAdded(newReview: Review): void {
+    // Refresh the entire reviews list
+    this.loadReviews();
 
-    // Refresh the rating distribution and average
-    this.reviewsService
-      .getRatingDistribution(this.tripId)
-      .subscribe((distribution) => {
-        this.ratingDistribution = distribution;
-      });
-
-    this.reviewsService.getAverageRating(this.tripId).subscribe((rating) => {
-      this.averageRating = rating;
-    });
-
-    // Hide the form
-    this.showAddReviewForm = false;
+    // Update traveler photos if new photos were added
+    if (newReview.photos?.length) {
+      this.reviewsService
+        .getAllTravelerPhotos(this.tripId)
+        .subscribe((photos) => {
+          this.travelerPhotos = photos;
+        });
+    }
   }
 
   // Close photo viewer
@@ -133,14 +138,32 @@ export class ReviewsComponent implements OnInit {
   }
 
   // Mark review as helpful or not helpful
-  markHelpful(reviewId: number, isHelpful: boolean): void {
-    this.reviewsService
-      .markReviewHelpful(reviewId, isHelpful)
-      .subscribe((success) => {
-        if (success) {
-          // Reload reviews to get updated helpful counts
-          this.loadReviews();
-        }
-      });
+  markHelpful(reviewId: number | string, isHelpful: boolean): void {
+    const review = this.reviews.find((r) => r.id === reviewId);
+    if (!review) return;
+
+    // If user already voted, remove the previous vote
+    if (review.userVote) {
+      if (review.userVote === 'helpful') {
+        review.helpful = (review.helpful || 1) - 1;
+      } else {
+        review.notHelpful = (review.notHelpful || 1) - 1;
+      }
+    }
+
+    // Toggle vote if clicking the same button
+    if (review.userVote === (isHelpful ? 'helpful' : 'not-helpful')) {
+      review.userVote = undefined;
+      return;
+    }
+
+    // Apply new vote
+    if (isHelpful) {
+      review.helpful = (review.helpful || 0) + 1;
+      review.userVote = 'helpful';
+    } else {
+      review.notHelpful = (review.notHelpful || 0) + 1;
+      review.userVote = 'not-helpful';
+    }
   }
 }
