@@ -1,55 +1,72 @@
 .layout {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  app-sidebar {
-    width: 250px;
-    position: fixed;
-    height: 100vh;
-    background: #f4f6f8;
-    border-right: 1px solid #ddd;
-    top: 0;
-    left: 0;
-    z-index: 100;
-  
-    @media (max-width: 768px) {
-      position: absolute;
-      left: -250px;
-      transition: left 0.3s ease-in-out;
-      &.active {
-        left: 0;
-      }
+  display: flex;
+  flex-direction: row;
+}
+
+app-sidebar {
+  width: 250px;
+  position: fixed;
+  height: 100vh;
+  background: #f4f6f8;
+  border-right: 1px solid #ddd;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    left: -250px;
+    transition: left 0.3s ease-in-out;
+
+    &.active {
+      left: 0;
     }
   }
-  
-  .hamburger-btn {
+}
+
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 200;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 2rem;
+  width: calc(100% - 250px);
+  background: #fff;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease-in-out;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+    padding: 1.5rem;
+  }
+}
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+
+  @media (min-width: 769px) {
     display: none;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 200;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-  
-    @media (max-width: 768px) {
-      display: block;
-    }
   }
-  
-  .main-content {
-    margin-left: 250px;
-    padding: 2rem;
-    width: calc(100% - 250px);
-    background: #fff;
-    min-height: 100vh;
-    transition: margin-left 0.3s ease-in-out;
-  
-    @media (max-width: 768px) {
-      margin-left: 0;
-      width: 100%;
-      padding: 1.5rem;
-    }
-  }
-  
+}
+app-sidebar {
+  transition: left 0.3s ease-in-out;
+}

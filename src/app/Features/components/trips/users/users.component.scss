@@ -1,0 +1,27 @@
+.layout {
+    display: flex;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 2rem;
+    width: calc(100% - 250px);
+    background: #fff;
+    min-height: 100vh;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+.user-details-dialog {
+    .field {
+        margin-bottom: 1rem;
+
+        i {
+            margin-right: 0.5rem;
+        }
+    }
+}

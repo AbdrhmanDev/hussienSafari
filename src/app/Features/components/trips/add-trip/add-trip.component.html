@@ -1,171 +1,179 @@
-<div class="layout">
-    <app-sidebar></app-sidebar>
+<div class="layout" id="layout" [ngClass]="{ 'sidebar-open': sidebarOpen }">
+    <!-- زرار الهامبرجر -->
     <button class="hamburger-btn" (click)="toggleSidebar()">
         <i class="pi pi-bars"></i>
-      </button>
-<div class="add-trip-wrapper">
-    <form [formGroup]="tripForm">
-        <!-- Stepper Navigation -->
+    </button>
 
-        <p-steps [model]="steps" [(activeIndex)]="activeStepIndex" [readonly]="false" class="mb-5"></p-steps>
-
-        <div class="grid gap-4">
-            <!-- Step 1: Trip Details -->
-            <ng-container *ngIf="activeStepIndex === 0">
-                <p-fieldset legend="✨ Trip Details" toggleable class="col-12 md:col-10 md:col-offset-1">
-                    <br>
-                    <div class="grid formgrid">
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <input pInputText id="name" formControlName="name" />
-                                <label for="name">Trip Name</label>
-                            </p-floatLabel>
-
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <input pInputText id="location" formControlName="location" />
-                                <label for="location">Location</label>
-                            </p-floatLabel>
-                        </div>
-
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <input pInputText id="destination" formControlName="destination" />
-                                <label for="destination">Destination</label>
-                            </p-floatLabel>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <input pInputText id="duration" formControlName="duration" />
-                                <label for="duration">Duration</label>
-                            </p-floatLabel>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <p-datePicker id="start_time" formControlName="start_time" [showTime]="true" />
-                                <label for="start_time">Start Time</label>
-                            </p-floatLabel>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <p-datePicker id="end_time" formControlName="end_time" [showTime]="true" />
-                                <label for="end_time">End Time</label>
-                            </p-floatLabel>
-                        </div>
-
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <textarea pTextarea id="description" formControlName="description" rows="3"></textarea>
-                                <label for="description">Description</label>
-                            </p-floatLabel>
-                        </div>
-                    </div>
-                </p-fieldset>
-            </ng-container>
-
-            <!-- Step 2: Media Upload & Pricing -->
-            <ng-container *ngIf="activeStepIndex === 1">
-                <p-fieldset legend="📷 Media Upload" toggleable class="col-12 md:col-10 md:col-offset-1">
-                    <p-fileUpload #fileUpload name="media[]" customUpload="true" [auto]="true" [multiple]="true"
-                        accept="image/*,video/*" [maxFileSize]="5000000" [showUploadButton]="false"
-                        [showCancelButton]="false" mode="advanced" (uploadHandler)="onMediaUpload($event)">
-                        <ng-template pTemplate="empty">
-                            <div class="p-text-center p-mt-4">Drag & Drop media here or click to browse</div>
-                        </ng-template>
-                    </p-fileUpload>
+    <!-- السايدبار اللي هيتحكم فيه الزرار -->
+    <app-sidebar></app-sidebar>
 
 
-                    <div class="media-preview mt-3 grid">
-                        <ng-container *ngFor="let media of selectedMedia; let i = index">
-                            <div class="col-6 md:col-3 relative">
-                                <button pButton type="button" icon="pi pi-times"
-                                    class="p-button-rounded p-button-danger p-button-sm absolute top-0 right-0 z-3"
-                                    (click)="removeMedia(i)">
-                                </button>
+    <div class="add-trip-wrapper">
+        <form [formGroup]="tripForm">
+            <!-- Stepper Navigation -->
 
-                                <img *ngIf="media.type === 'image'" [src]="media.url" width="100%"
-                                    class="border-round shadow-2" />
-                                <video *ngIf="media.type === 'video'" [src]="media.url" width="100%" controls
-                                    class="border-round shadow-2"></video>
-                            </div>
-                        </ng-container>
-                    </div>
+            <p-steps [model]="steps" [(activeIndex)]="activeStepIndex" [readonly]="false" class="mb-5"></p-steps>
 
-
-                </p-fieldset>
-
-                <p-fieldset legend="💲 Pricing & Duration" toggleable class="col-12 md:col-10 md:col-offset-1">
-                    <br>
-
-                    <div class="grid formgrid">
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <input type="number" pInputText id="price" formControlName="price_per_person" />
-                                <label for="price">Price Per Person</label>
-                            </p-floatLabel>
-                        </div>
-                        <div class="field col-12 md:col-6">
-                            <p-floatLabel>
-                                <p-dropdown inputId="category" formControlName="category" [options]="categories"
-                                    optionLabel="label" placeholder="Select Category"></p-dropdown>
-                                <label for="category">Category</label>
-                            </p-floatLabel>
-                        </div>
-
-
-                        <!-- Inclusions -->
-                        <div class="field col-12 md:col-6">
-                            <div class="flex gap-2 align-items-end">
+            <div class="grid gap-4">
+                <!-- Step 1: Trip Details -->
+                <ng-container *ngIf="activeStepIndex === 0">
+                    <p-fieldset legend="✨ Trip Details" toggleable class="col-12 md:col-10 md:col-offset-1">
+                        <br>
+                        <div class="grid formgrid">
+                            <div class="field col-12 md:col-6">
                                 <p-floatLabel>
-                                    <input pInputText id="inclusion" [formControl]="inclusionInput" />
-                                    <label for="inclusion">Add inclusion</label>
+                                    <input pInputText id="name" formControlName="name" />
+                                    <label for="name">Trip Name</label>
                                 </p-floatLabel>
-                                <button pButton type="button" icon="pi pi-plus" (click)="addInclusion()"
-                                    class="p-button-sm"></button>
-                            </div>
-                            <div class="mt-2">
-                                <p-chip *ngFor="let item of tripForm.value.inclusions; let i = index" label="{{ item }}"
-                                    removable="true" (remove)="removeInclusion(i)" class="mr-2 mb-2"></p-chip>
-                            </div>
-                        </div>
 
-                        <!-- Exclusions -->
-                        <div class="field col-12 md:col-6">
-                            <div class="flex gap-2 align-items-end">
+                            </div>
+                            <div class="field col-12 md:col-6">
                                 <p-floatLabel>
-                                    <input pInputText id="exclusion" [formControl]="exclusionInput" />
-                                    <label for="exclusion">Add exclusion</label>
+                                    <input pInputText id="location" formControlName="location" />
+                                    <label for="location">Location</label>
                                 </p-floatLabel>
-                                <button pButton type="button" icon="pi pi-plus" (click)="addExclusion()"
-                                    class="p-button-sm"></button>
                             </div>
-                            <div class="mt-2">
-                                <p-chip *ngFor="let item of tripForm.value.exclusions; let i = index" label="{{ item }}"
-                                    removable="true" (remove)="removeExclusion(i)" class="mr-2 mb-2"></p-chip>
+
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <input pInputText id="destination" formControlName="destination" />
+                                    <label for="destination">Destination</label>
+                                </p-floatLabel>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <input pInputText id="duration" formControlName="duration" />
+                                    <label for="duration">Duration</label>
+                                </p-floatLabel>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <p-datePicker id="start_time" formControlName="start_time" [showTime]="true" />
+                                    <label for="start_time">Start Time</label>
+                                </p-floatLabel>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <p-datePicker id="end_time" formControlName="end_time" [showTime]="true" />
+                                    <label for="end_time">End Time</label>
+                                </p-floatLabel>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <textarea pTextarea id="description" formControlName="description"
+                                        rows="3"></textarea>
+                                    <label for="description">Description</label>
+                                </p-floatLabel>
                             </div>
                         </div>
-                    </div>
-                </p-fieldset>
-            </ng-container>
+                    </p-fieldset>
+                </ng-container>
 
-            <!-- Step 3: Submit -->
-            <ng-container *ngIf="activeStepIndex === 2">
-                <p-card header="📌 Review & Submit" class="col-12 md:col-10 md:col-offset-1">
-                    <p>Ready to submit your trip? Click the button below.</p>
-                    <div class="text-center mt-4">
-                        <button pButton type="button" label="Submit Trip" class="p-button-success p-button-lg"
-                            (click)="submitTrip()"></button>
-                    </div>
-                </p-card>
-            </ng-container>
-        </div>
+                <!-- Step 2: Media Upload & Pricing -->
+                <ng-container *ngIf="activeStepIndex === 1">
+                    <p-fieldset legend="📷 Media Upload" toggleable class="col-12 md:col-10 md:col-offset-1">
+                        <p-fileUpload #fileUpload name="media[]" customUpload="true" [auto]="true" [multiple]="true"
+                            accept="image/*,video/*" [maxFileSize]="5000000" [showUploadButton]="false"
+                            [showCancelButton]="false" mode="advanced" (uploadHandler)="onMediaUpload($event)">
+                            <ng-template pTemplate="empty">
+                                <div class="p-text-center p-mt-4">Drag & Drop media here or click to browse</div>
+                            </ng-template>
+                        </p-fileUpload>
 
-        <div class="flex justify-content-between mt-5 col-12 md:col-10 md:col-offset-1">
-            <button *ngIf="activeStepIndex > 0" pButton type="button" label="Previous" icon="pi pi-angle-left"
-                class="p-button-secondary" (click)="prevStep()"></button>
-            <button *ngIf="activeStepIndex < 2" pButton type="button" label="Next" icon="pi pi-angle-right"
-                iconPos="right" class="p-button-primary" (click)="nextStep()"></button>
-        </div>
-    </form>
-</div>
+
+                        <div class="media-preview mt-3 grid">
+                            <ng-container *ngFor="let media of selectedMedia; let i = index">
+                                <div class="col-6 md:col-3 relative">
+                                    <button pButton type="button" icon="pi pi-times"
+                                        class="p-button-rounded p-button-danger p-button-sm absolute top-0 right-0 z-3"
+                                        (click)="removeMedia(i)">
+                                    </button>
+
+                                    <img *ngIf="media.type === 'image'" [src]="media.url" width="100%"
+                                        class="border-round shadow-2" />
+                                    <video *ngIf="media.type === 'video'" [src]="media.url" width="100%" controls
+                                        class="border-round shadow-2"></video>
+                                </div>
+                            </ng-container>
+                        </div>
+
+
+                    </p-fieldset>
+
+                    <p-fieldset legend="💲 Pricing & Duration" toggleable class="col-12 md:col-10 md:col-offset-1">
+                        <br>
+
+                        <div class="grid formgrid">
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <input type="number" pInputText id="price" formControlName="price_per_person" />
+                                    <label for="price">Price Per Person</label>
+                                </p-floatLabel>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p-floatLabel>
+                                    <p-dropdown inputId="category" formControlName="category" [options]="categories"
+                                        optionLabel="label" placeholder="Select Category"></p-dropdown>
+                                    <label for="category">Category</label>
+                                </p-floatLabel>
+                            </div>
+
+
+                            <!-- Inclusions -->
+                            <div class="field col-12 md:col-6">
+                                <div class="flex gap-2 align-items-end">
+                                    <p-floatLabel>
+                                        <input pInputText id="inclusion" [formControl]="inclusionInput" />
+                                        <label for="inclusion">Add inclusion</label>
+                                    </p-floatLabel>
+                                    <button pButton type="button" icon="pi pi-plus" (click)="addInclusion()"
+                                        class="p-button-sm"></button>
+                                </div>
+                                <div class="mt-2">
+                                    <p-chip *ngFor="let item of tripForm.value.inclusions; let i = index"
+                                        label="{{ item }}" removable="true" (remove)="removeInclusion(i)"
+                                        class="mr-2 mb-2"></p-chip>
+                                </div>
+                            </div>
+
+                            <!-- Exclusions -->
+                            <div class="field col-12 md:col-6">
+                                <div class="flex gap-2 align-items-end">
+                                    <p-floatLabel>
+                                        <input pInputText id="exclusion" [formControl]="exclusionInput" />
+                                        <label for="exclusion">Add exclusion</label>
+                                    </p-floatLabel>
+                                    <button pButton type="button" icon="pi pi-plus" (click)="addExclusion()"
+                                        class="p-button-sm"></button>
+                                </div>
+                                <div class="mt-2">
+                                    <p-chip *ngFor="let item of tripForm.value.exclusions; let i = index"
+                                        label="{{ item }}" removable="true" (remove)="removeExclusion(i)"
+                                        class="mr-2 mb-2"></p-chip>
+                                </div>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </ng-container>
+
+                <!-- Step 3: Submit -->
+                <ng-container *ngIf="activeStepIndex === 2">
+                    <p-card header="📌 Review & Submit" class="col-12 md:col-10 md:col-offset-1">
+                        <p>Ready to submit your trip? Click the button below.</p>
+                        <div class="text-center mt-4">
+                            <button pButton type="button" label="Submit Trip" class="p-button-success p-button-lg"
+                                (click)="submitTrip()"></button>
+                        </div>
+                    </p-card>
+                </ng-container>
+            </div>
+
+            <div class="flex justify-content-between mt-5 col-12 md:col-10 md:col-offset-1">
+                <button *ngIf="activeStepIndex > 0" pButton type="button" label="Previous" icon="pi pi-angle-left"
+                    class="p-button-secondary" (click)="prevStep()"></button>
+                <button *ngIf="activeStepIndex < 2" pButton type="button" label="Next" icon="pi pi-angle-right"
+                    iconPos="right" class="p-button-primary" (click)="nextStep()"></button>
+            </div>
+        </form>
+    </div>

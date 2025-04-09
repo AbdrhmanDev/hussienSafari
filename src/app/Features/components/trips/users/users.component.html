@@ -1,0 +1,78 @@
+<div class="layout">
+    <app-sidebar></app-sidebar>
+
+    <div class="main-content">
+        <div class="flex justify-content-between align-items-center mb-4">
+            <h2>Manage Users</h2>
+            <!-- <button pButton label="Add User" icon="pi pi-user-plus"></button> -->
+        </div>
+
+        <!-- Search & Filters -->
+        <div class="grid gap-3 mb-3">
+            <div class="col-12 md:col-4">
+                <input pInputText [(ngModel)]="searchText" (input)="filterUsers()" placeholder="Search by name or email"
+                    class="w-full" />
+            </div>
+            <!-- <div class="col-6 md:col-2">
+                <p-dropdown [options]="roles" [(ngModel)]="selectedRole" placeholder="Role" (onChange)="filterUsers()"
+                    class="w-full" />
+            </div>
+            <div class="col-6 md:col-2">
+                <p-dropdown [options]="statusOptions" [(ngModel)]="selectedStatus" placeholder="Status"
+                    (onChange)="filterUsers()" class="w-full" />
+            </div> -->
+        </div>
+
+        <!-- Table -->
+        <p-table [value]="filteredUsers" [paginator]="true" [rows]="5" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Image</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td><img [src]="user.profileImage" alt="Profile" width="40" class="border-circle" /></td>
+                    <td>{{ user.firstName }} {{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>
+                        <p-tag [value]="user.role" [severity]="user.role === 'Admin' ? 'info' : 'success'"></p-tag>
+                    </td>
+                    <td>
+                        <p-tag [value]="user.isActive ? 'Active' : 'Inactive'"
+                            [severity]="user.isActive ? 'success' : 'danger'"></p-tag>
+                    </td>
+                    <td>
+                        <div class="flex gap-2">
+                            <button pButton icon="pi pi-eye" class="p-button-text" (click)="viewUser(user)"></button>
+                            <button pButton icon="pi pi-pencil" class="p-button-text p-button-info"
+                                (click)="editUser(user._id)"></button>
+                            <button pButton icon="pi pi-trash" class="p-button-text p-button-danger"
+                                (click)="deleteUser(user._id)"></button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <!-- Dialog -->
+        <p-dialog header="User Details" [(visible)]="showDetails" [modal]="true" [style]="{ width: '450px' }">
+            <ng-container *ngIf="selectedUser">
+                <div class="p-fluid">
+                    <p><strong>Name:</strong> {{ selectedUser.firstName }} {{ selectedUser.lastName }}</p>
+                    <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+                    <p><strong>Phone:</strong> {{ selectedUser.phone }}</p>
+                    <p><strong>Role:</strong> {{ selectedUser.role }}</p>
+                    <p><strong>Status:</strong> {{ selectedUser.isActive ? 'Active' : 'Inactive' }}</p>
+                </div>
+            </ng-container>
+        </p-dialog>
+    </div>
+</div>

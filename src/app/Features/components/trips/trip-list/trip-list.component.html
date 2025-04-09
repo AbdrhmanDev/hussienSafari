@@ -2,9 +2,10 @@
     <!-- Sidebar خارج المحتوى الرئيسي -->
     <button class="hamburger-btn" (click)="toggleSidebar()">
         <i class="pi pi-bars"></i>
-      </button>
-      
-    <app-sidebar></app-sidebar>
+    </button>
+    <div class="mobile-overlay" *ngIf="isSidebarVisible" (click)="toggleSidebar()">
+    </div>
+    <app-sidebar [ngClass]="{ 'active': isSidebarVisible }"></app-sidebar>
 
     <!-- المحتوى الأساسي -->
     <div class="main-content">

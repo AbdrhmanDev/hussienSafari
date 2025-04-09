@@ -200,10 +200,25 @@ export class AddTripComponent {
     updated.splice(index, 1);
     this.tripForm.patchValue({ exclusions: updated });
   }
-  isSidebarActive: boolean = false;
+  // isSidebarActive: boolean = false;
+
+  // toggleSidebar() {
+  //   const sidebarEl = document.querySelector('app-sidebar');
+  //   sidebarEl?.classList.toggle('active');
+  // }
+  sidebarOpen = false;
 
   toggleSidebar() {
-    const sidebarEl = document.querySelector('app-sidebar');
-    sidebarEl?.classList.toggle('active');
+    this.sidebarOpen = !this.sidebarOpen;
+    const layout = document.querySelector('.layout');
+    const sidebar = document.querySelector('app-sidebar');
+
+    if (this.sidebarOpen) {
+      layout?.classList.add('sidebar-open');
+      sidebar?.classList.add('active');
+    } else {
+      layout?.classList.remove('sidebar-open');
+      sidebar?.classList.remove('active');
+    }
   }
 }

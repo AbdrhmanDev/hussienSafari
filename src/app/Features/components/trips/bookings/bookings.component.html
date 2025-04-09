@@ -1,8 +1,10 @@
 <div class="layout">
-    <app-sidebar></app-sidebar>
     <button class="hamburger-btn" (click)="toggleSidebar()">
         <i class="pi pi-bars"></i>
-      </button>
+    </button>
+
+    <app-sidebar></app-sidebar>
+
     <div class="main-content">
         <div class="flex justify-content-between align-items-center mb-4">
             <h2>Bookings</h2>
@@ -16,16 +18,16 @@
 
         <div class="grid gap-3 mb-3">
             <div class="col-12 md:col-4">
-                <input pInputText name="search" [(ngModel)]="searchText" (input)="filterBookings()" placeholder="Search..."
-                    class="w-full" />
+                <input pInputText name="search" [(ngModel)]="searchText" (input)="filterBookings()"
+                    placeholder="Search..." class="w-full" />
             </div>
             <div class="col-6 md:col-2">
                 <p-dropdown name="statuses" [options]="statuses" [(ngModel)]="selectedStatus" placeholder="Status"
                     (onChange)="filterBookings()" class="w-full" />
             </div>
             <div class="col-6 md:col-2">
-                <p-dropdown name="categories" [options]="categories" [(ngModel)]="selectedCategory" placeholder="Category"
-                    (onChange)="filterBookings()" class="w-full" />
+                <p-dropdown name="categories" [options]="categories" [(ngModel)]="selectedCategory"
+                    placeholder="Category" (onChange)="filterBookings()" class="w-full" />
             </div>
             <!-- <div class="col-12 md:col-4">
                 <p-calendar  [(ngModel)]="dateRange" selectionMode="range" placeholder="Filter by date"
@@ -59,8 +61,8 @@
                     <td>
                         <div class="flex gap-2">
                             <button pButton icon="pi pi-eye" class="p-button-text" (click)="viewBooking(b)"></button>
-                            <button pButton icon="pi pi-pencil" class="p-button-text p-button-info"
-                                (click)="editBooking(b._id)"></button>
+                            <!-- <button pButton icon="pi pi-pencil" class="p-button-text p-button-info"
+                                (click)="editBooking(b._id)"></button> -->
                             <button pButton icon="pi pi-trash" class="p-button-text p-button-danger"
                                 (click)="deleteBooking(b._id)"></button>
                         </div>
@@ -69,18 +71,65 @@
             </ng-template>
         </p-table>
 
-        <p-dialog header="Booking Details" [(visible)]="showDetails" [style]="{ width: '450px' }">
+        <p-dialog header="📋 Booking Details" [(visible)]="showDetails" [style]="{ width: '450px' }" [modal]="true"
+            [dismissableMask]="true" [draggable]="false" class="booking-details-dialog">
             <ng-container *ngIf="selectedBooking">
-                <div class="p-fluid">
-                    <p><strong>User:</strong> {{ selectedBooking.userID }}</p>
-                    <p><strong>Trip:</strong> {{ selectedBooking.tripID }}</p>
-                    <p><strong>Date:</strong> {{ selectedBooking.bookingDate }}</p>
-                    <p><strong>People:</strong> {{ selectedBooking.numberOfPeople }}</p>
-                    <p><strong>Total:</strong> {{ selectedBooking.totalPrice }}</p>
-                    <p><strong>Status:</strong> {{ selectedBooking.status }}</p>
+                <div class="p-fluid grid gap-3">
+
+                    <div class="col-12 flex align-items-center gap-2">
+                        <i class="pi pi-user text-primary"></i>
+                        <div>
+                            <strong>User:</strong>
+                            <span class="ml-1">{{ selectedBooking.userID }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 flex align-items-center gap-2">
+                        <i class="pi pi-globe text-success"></i>
+                        <div>
+                            <strong>Trip:</strong>
+                            <span class="ml-1">{{ selectedBooking.tripID }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-6 flex align-items-center gap-2">
+                        <i class="pi pi-calendar text-info"></i>
+                        <div>
+                            <strong>Date:</strong>
+                            <span class="ml-1">{{ selectedBooking.bookingDate | date:'mediumDate' }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-6 flex align-items-center gap-2">
+                        <i class="pi pi-users text-warning"></i>
+                        <div>
+                            <strong>People:</strong>
+                            <span class="ml-1">{{ selectedBooking.numberOfPeople }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-6 flex align-items-center gap-2">
+                        <i class="pi pi-dollar text-danger"></i>
+                        <div>
+                            <strong>Total:</strong>
+                            <span class="ml-1">${{ selectedBooking.totalPrice }}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-6 flex align-items-center gap-2">
+                        <i class="pi pi-check-circle text-success"></i>
+                        <div>
+                            <strong>Status:</strong>
+                            <p-tag [value]="selectedBooking.status"
+                                [severity]="selectedBooking.status === 'Confirmed' ? 'success' : selectedBooking.status === 'Pending' ? 'warn' : 'danger'">
+                            </p-tag>
+                        </div>
+                    </div>
+
                 </div>
             </ng-container>
         </p-dialog>
+
 
         <!-- <div class="mt-5">
             <p-chart type="pie" [data]="chartData" [options]="chartOptions"></p-chart>

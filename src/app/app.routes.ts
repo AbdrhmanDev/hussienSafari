@@ -7,6 +7,7 @@ import { AddTripComponent } from './Features/components/trips/add-trip/add-trip.
 import { TripListComponent } from './Features/components/trips/trip-list/trip-list.component';
 import { EditTripComponent } from './Features/components/trips/edit-trip/edit-trip.component';
 import { BookingsComponent } from './Features/components/trips/bookings/bookings.component';
+import { UsersComponent } from './Features/components/trips/users/users.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'triplist', component: TripListComponent },
   { path: 'edittrip/:id', component: EditTripComponent },
   { path: 'bookings', component: BookingsComponent },
+  { path: 'users', component: UsersComponent },
   { path: '**', redirectTo: '' }, // Default route
 ];
