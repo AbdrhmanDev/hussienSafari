@@ -1,37 +1,42 @@
 <!-- trip-details.component.html -->
 <div class="trip-details-container">
-  <h1 class="trip-title">
-    {{
-      trip?.title ||
-        "Giza pyramids, Sphinx, ATV bike, Lunch,Camel ride, Dinner cruise& shopping tour"
-    }}
-  </h1>
-  <div class="breadcrumb-container">
-    <div class="breadcrumb-path"></div>
-    <div class="contact-info">
-      <span
-        ><i class="pi pi-phone"></i> Book online or call: +1(702) 648-5873</span
-      >
-      <span><i class="pi pi-comments"></i> Chat now</span>
+  <div class="header-container">
+    <h1 class="trip-title">
+      {{
+        trip?.title ||
+          "Giza pyramids, Sphinx, ATV bike, Lunch,Camel ride, Dinner cruise& shopping tour"
+      }}
+    </h1>
+    <div class="breadcrumb-container">
+      <div class="breadcrumb-path"></div>
+      <div class="contact-info">
+        <span
+          ><i class="pi pi-phone"></i> Book online or call: +1(702)
+          648-5873</span
+        >
+        <span><i class="pi pi-comments"></i> Chat now</span>
+      </div>
     </div>
-  </div>
-  <div class="rating-summary">
-    <div class="stars">
-      <p-rating [ngModel]="trip?.rating || 5" [readonly]="true"></p-rating>
-      <span class="review-count">{{ trip?.reviewCount || 634 }} Reviews</span>
-    </div>
-    <div class="trip-badges">
-      <span class="badge"
-        ><i class="pi pi-thumbs-up"></i> Recommended by 99% of travelers</span
-      >
-      <span class="badge"><i class="pi pi-star"></i> Badge of Excellence</span>
-      <span class="location"
-        ><i class="pi pi-map-marker"></i>
-        {{ trip?.location || "Cairo, Egypt" }}</span
-      >
-    </div>
-    <div class="price-guarantee">
-      <i class="pi pi-check-circle"></i> Lowest Price Guarantee
+    <div class="rating-summary">
+      <div class="stars">
+        <p-rating [ngModel]="trip?.rating || 5" [readonly]="true"></p-rating>
+        <span class="review-count">{{ trip?.reviewCount || 634 }} Reviews</span>
+      </div>
+      <div class="trip-badges">
+        <span class="badge"
+          ><i class="pi pi-thumbs-up"></i> Recommended by 99% of travelers</span
+        >
+        <span class="badge"
+          ><i class="pi pi-star"></i> Badge of Excellence</span
+        >
+        <span class="location"
+          ><i class="pi pi-map-marker"></i>
+          {{ trip?.location || "Cairo, Egypt" }}</span
+        >
+      </div>
+      <div class="price-guarantee">
+        <i class="pi pi-check-circle"></i> Lowest Price Guarantee
+      </div>
     </div>
   </div>
 
@@ -265,7 +270,6 @@
               <i class="pi pi-check-circle"></i> Reserve Now and Pay Later
               <span>Secure your spot while staying flexible</span>
             </div>
-           
           </div>
         </div>
       </div>
@@ -295,17 +299,5 @@
     </div>
   </div>
 
-  <div class="reviews-section">
-    <h2>Client Reviews</h2>
-    <div class="reviews-container">
-      <div *ngFor="let review of reviews" class="review-card">
-        <div class="user-info">
-          <h3>{{ review.userName }}</h3>
-          <small>{{ review.date }}</small>
-        </div>
-        <p-rating [ngModel]="review.rating" [readonly]="true"></p-rating>
-        <p class="review-comment">{{ review.comment }}</p>
-      </div>
-    </div>
-  </div>
+  <app-reviews [tripId]="trip?.id || 0"></app-reviews>
 </div>

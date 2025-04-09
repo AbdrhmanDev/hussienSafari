@@ -11,13 +11,8 @@ import { Trip, TripsService } from '../../../services/trips.service';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
-interface Review {
-  userName: string;
-  date: string;
-  rating: number;
-  comment: string;
-}
+import { DropdownModule } from 'primeng/dropdown';
+import { ReviewsComponent } from '../../reviews/reviews.component';
 
 @Component({
   selector: 'app-trip-details',
@@ -33,6 +28,8 @@ interface Review {
     CalendarModule,
     InputNumberModule,
     OverlayPanelModule,
+    DropdownModule,
+    ReviewsComponent,
   ],
   templateUrl: './trip-details.component.html',
   styleUrls: ['./trip-details.component.scss'],
@@ -62,36 +59,7 @@ export class TripDetailsComponent implements OnInit {
     },
   ];
 
-  reviews: Review[] = [
-    {
-      userName: 'John Doe',
-      date: '2024-01-15',
-      rating: 5,
-      comment:
-        'Amazing safari experience! The guides were knowledgeable and we saw incredible wildlife.',
-    },
-    {
-      userName: 'Jane Smith',
-      date: '2024-01-10',
-      rating: 4,
-      comment:
-        'Great trip overall. The accommodations were comfortable and the scenery was breathtaking.',
-    },
-    {
-      userName: 'Mike Johnson',
-      date: '2024-01-05',
-      rating: 5,
-      comment:
-        'Once in a lifetime experience! The staff was professional and the wildlife sightings were spectacular.',
-    },
-    {
-      userName: 'Sarah Wilson',
-      date: '2024-01-01',
-      rating: 4,
-      comment:
-        'Wonderful adventure with great attention to detail. Would highly recommend!',
-    },
-  ];
+
 
   selectedDate: Date = new Date();
   minDate: Date = new Date();
@@ -190,4 +158,6 @@ export class TripDetailsComponent implements OnInit {
       this.currentIndex++;
     }
   }
+
+
 }
