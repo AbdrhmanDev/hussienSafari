@@ -152,7 +152,7 @@ export class ReviewsService {
     },
     {
       id: 6,
-      tripId: 1,
+      tripId: 2,
       userId: 'user6',
       userName: 'Emily Davis',
       userAvatar: 'assets/sliderimages/image3.jpg',
@@ -248,5 +248,55 @@ export class ReviewsService {
     }
 
     return of(true);
+  }
+
+  addReview(
+    review: Omit<Review, 'id' | 'helpful' | 'notHelpful'>
+  ): Observable<Review> {
+    // Generate a new ID (highest ID + 1)
+    const newId = Math.max(...this.mockReviews.map((r) => r.id), 0) + 1;
+
+    // Create the new review object
+    const newReview: Review = {
+      ...review,
+      id: newId,
+      helpful: 0,
+      notHelpful: 0,
+      date: new Date().toISOString().split('T')[0], // Format as YYYY-MM-DD
+    };
+
+    // Add to the mock reviews array
+    this.mockReviews.push(newReview);
+
+    return of(newReview);
+  }
+
+  addReviewPhoto(
+    reviewId: number,
+    photo: Omit<ReviewPhoto, 'id'>
+  ): Observable<ReviewPhoto> {
+    const reviewIndex = this.mockReviews.findIndex((r) => r.id === reviewId);
+    if (reviewIndex === -1) return of(null as unknown as ReviewPhoto);
+
+    // Initialize photos array if it doesn't exist
+    if (!this.mockReviews[reviewIndex].photos) {
+      this.mockReviews[reviewIndex].photos = [];
+    }
+
+    // Generate a new photo ID
+    const newPhotoId = this.mockReviews[reviewIndex].photos?.length
+      ? Math.max(...this.mockReviews[reviewIndex].photos!.map((p) => p.id), 0) +
+        1
+      : 1;
+
+    const newPhoto: ReviewPhoto = {
+      ...photo,
+      id: newPhotoId,
+    };
+
+    // Add the photo to the review
+    this.mockReviews[reviewIndex].photos!.push(newPhoto);
+
+    return of(newPhoto);
   }
 }

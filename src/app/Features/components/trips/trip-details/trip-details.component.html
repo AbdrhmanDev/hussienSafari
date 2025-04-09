@@ -300,4 +300,22 @@
   </div>
 
   <app-reviews [tripId]="trip?.id || 0"></app-reviews>
+
+  <!-- Floating Review Button -->
+  <button class="floating-review-btn" (click)="toggleReviewForm()">
+    <i class="pi pi-star"></i> Write a Review
+  </button>
+
+  <!-- Floating Review Form -->
+  <div class="floating-review-container" [class.active]="showReviewForm">
+    <div class="floating-review-content">
+      <button class="close-review-btn" (click)="toggleReviewForm()">
+        &times;
+      </button>
+      <app-add-reviews
+        [tripId]="trip?.id || 0"
+        (reviewAdded)="onReviewAdded($event)"
+      ></app-add-reviews>
+    </div>
+  </div>
 </div>

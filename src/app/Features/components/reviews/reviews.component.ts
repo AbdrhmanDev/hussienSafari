@@ -10,6 +10,7 @@ import {
   RatingDistribution,
   ReviewsService,
 } from '../../services/reviews.service';
+import { AddReviewsComponent } from './add-reviews/add-reviews.component';
 
 @Component({
   selector: 'app-reviews',
@@ -20,6 +21,7 @@ import {
     FormsModule,
     ButtonModule,
     DropdownModule,
+    AddReviewsComponent,
   ],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.scss',
@@ -30,6 +32,7 @@ export class ReviewsComponent implements OnInit {
   reviews: Review[] = [];
   travelerPhotos: ReviewPhoto[] = [];
   selectedPhoto: ReviewPhoto | null = null;
+  showAddReviewForm: boolean = false;
   ratingDistribution: RatingDistribution[] = [];
   averageRating: number = 0;
 
@@ -97,6 +100,31 @@ export class ReviewsComponent implements OnInit {
   // Open photo viewer
   openPhotoViewer(photo: ReviewPhoto): void {
     this.selectedPhoto = photo;
+  }
+
+  // Toggle add review form
+  toggleAddReviewForm(): void {
+    this.showAddReviewForm = !this.showAddReviewForm;
+  }
+
+  // Handle new review added
+  onReviewAdded(review: Review): void {
+    // Add the new review to the list
+    this.reviews.unshift(review);
+
+    // Refresh the rating distribution and average
+    this.reviewsService
+      .getRatingDistribution(this.tripId)
+      .subscribe((distribution) => {
+        this.ratingDistribution = distribution;
+      });
+
+    this.reviewsService.getAverageRating(this.tripId).subscribe((rating) => {
+      this.averageRating = rating;
+    });
+
+    // Hide the form
+    this.showAddReviewForm = false;
   }
 
   // Close photo viewer

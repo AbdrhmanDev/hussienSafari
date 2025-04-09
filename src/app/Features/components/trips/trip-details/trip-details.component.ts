@@ -13,6 +13,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DropdownModule } from 'primeng/dropdown';
 import { ReviewsComponent } from '../../reviews/reviews.component';
+import { AddReviewsComponent } from '../../reviews/add-reviews/add-reviews.component';
+import { Review } from '../../../services/reviews.service';
+import 'primeicons/primeicons.css';
 
 @Component({
   selector: 'app-trip-details',
@@ -30,6 +33,7 @@ import { ReviewsComponent } from '../../reviews/reviews.component';
     OverlayPanelModule,
     DropdownModule,
     ReviewsComponent,
+    AddReviewsComponent,
   ],
   templateUrl: './trip-details.component.html',
   styleUrls: ['./trip-details.component.scss'],
@@ -40,6 +44,7 @@ export class TripDetailsComponent implements OnInit {
   videos: { type: 'video'; url: string }[] = []; // Array for videos
   activeVideo: string | null = null; // Track the currently playing video
   currentIndex = 0;
+  showReviewForm = false; // Control the visibility of the floating review form
 
   responsiveOptions: any[] = [
     {
@@ -58,8 +63,6 @@ export class TripDetailsComponent implements OnInit {
       thumbnailsPosition: 'bottom',
     },
   ];
-
-
 
   selectedDate: Date = new Date();
   minDate: Date = new Date();
@@ -115,6 +118,57 @@ export class TripDetailsComponent implements OnInit {
     this.showHeroVideo = false;
   }
 
+  toggleReviewForm(): void {
+    this.showReviewForm = !this.showReviewForm;
+    // Add a class to the body to prevent scrolling when the form is open
+    if (this.showReviewForm) {
+      document.body.classList.add('review-form-open');
+    } else {
+      document.body.classList.remove('review-form-open');
+    }
+  }
+
+  onReviewAdded(review: Review): void {
+    // Close the review form after submission
+    this.showReviewForm = false;
+    document.body.classList.remove('review-form-open');
+
+    // Show a success notification
+    this.showSuccessNotification();
+  }
+
+  showSuccessNotification(): void {
+    const notification = document.createElement('div');
+    notification.className = 'notification success';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <div class="notification-icon">
+          <i class="pi pi-check-circle"></i>
+        </div>
+        <div class="notification-text">
+          <h4>Success!</h4>
+          <p>Your review has been added successfully</p>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Force reflow
+    notification.offsetHeight;
+
+    // Add show class
+    notification.classList.add('show');
+
+    // Remove notification after animation
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+
   stopVideo(): void {
     if (this.activeVideo) {
       const videoElement = document.querySelector(
@@ -158,6 +212,4 @@ export class TripDetailsComponent implements OnInit {
       this.currentIndex++;
     }
   }
-
-
 }
