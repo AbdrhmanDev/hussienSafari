@@ -236,6 +236,23 @@ export class ReviewsService {
     const sum = reviews.reduce((total, review) => total + review.rating, 0);
     return of(parseFloat((sum / reviews.length).toFixed(1)));
   }
+  addReviewPhoto(reviewId: number, photoData: Omit<ReviewPhoto, 'id'>): Observable<ReviewPhoto> {
+    // Mock implementation for adding a review photo
+    return of({
+      id: Math.floor(Math.random() * 1000), // Mock ID
+      ...photoData,
+    });
+  }
+  addReview(reviewData: Omit<Review, 'id' | 'helpful' | 'notHelpful'>): Observable<Review> {
+    // Mock implementation for adding a review
+    const newReview: Review = {
+      ...reviewData,
+      id: Math.floor(Math.random() * 10000), // Mock ID
+      helpful: 0,
+      notHelpful: 0,
+    };
+    return of(newReview); // Simulate an API call with RxJS 'of'
+  }
 
   markReviewHelpful(reviewId: number, helpful: boolean): Observable<boolean> {
     const reviewIndex = this.mockReviews.findIndex((r) => r.id === reviewId);

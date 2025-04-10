@@ -10,6 +10,7 @@ import {
   RatingDistribution,
   ReviewsService,
 } from '../../services/reviews.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
@@ -115,4 +116,17 @@ export class ReviewsComponent implements OnInit {
         }
       });
   }
+  addReviewPhoto(reviewId: number, photoData: Omit<ReviewPhoto, 'id'>): Observable<ReviewPhoto> {
+    // Mock implementation for adding a review photo
+    return of({
+      id: Math.floor(Math.random() * 1000), // Mock ID
+      ...photoData,
+    });
+  }
 }
+
+
+function of(arg0: { url: string; caption?: string | undefined; uploadedBy: string; uploadDate: string; id: number; }): Observable<ReviewPhoto> {
+  throw new Error('Function not implemented.');
+}
+
