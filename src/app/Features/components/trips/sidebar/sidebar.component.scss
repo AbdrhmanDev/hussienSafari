@@ -1,19 +1,78 @@
-app-sidebar {
+.sidebar-wrapper {
   width: 250px;
   position: fixed;
   height: 100vh;
-  background: #f4f6f8;
-  border-right: 1px solid #ddd;
+  background: linear-gradient(to bottom, #ffffff, #f4f6f8);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   top: 0;
   left: 0;
   z-index: 100;
+  padding: 1.5rem 1rem;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-    left: -250px;
-    transition: left 0.3s ease-in-out;
+    width: 80%;
+    transform: translateX(-100%);
 
     &.active {
-      left: 0;
+      transform: translateX(0);
+      visibility: visible;
+    }
+  }
+
+  ::ng-deep {
+    .p-panelmenu {
+      border: none;
+      background: transparent;
+
+      .p-panelmenu-header-link {
+        padding: 1rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.05);
+        }
+
+        .p-menuitem-icon {
+          color: #2196F3;
+          margin-right: 0.75rem;
+        }
+
+        .p-menuitem-text {
+          color: #333;
+          font-weight: 500;
+        }
+      }
+
+      .p-panelmenu-content {
+        border: none;
+        background: transparent;
+        padding: 0.5rem 0;
+
+        .p-menuitem-link {
+          padding: 0.75rem 1rem 0.75rem 2.5rem;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: rgba(33, 150, 243, 0.1);
+          }
+
+          .p-menuitem-text {
+            color: #666;
+          }
+
+          &.p-menuitem-link-active {
+            background: rgba(33, 150, 243, 0.1);
+            .p-menuitem-text {
+              color: #2196F3;
+              font-weight: 500;
+            }
+          }
+        }
+      }
     }
   }
 }

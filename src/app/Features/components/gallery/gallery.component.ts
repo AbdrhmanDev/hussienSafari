@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { SidebarComponent } from '../trips/sidebar/sidebar.component';
 import {
   animate,
   style,
@@ -14,7 +15,7 @@ import {
   query,
 } from '@angular/animations';
 
-interface GalleryItem {
+export interface GalleryItem {
   id: number;
   type: 'image' | 'video';
   url: string;
@@ -28,7 +29,7 @@ interface GalleryItem {
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [CommonModule, GalleriaModule, ButtonModule, TagModule, ToastModule],
+  imports: [CommonModule, GalleriaModule, ButtonModule, TagModule, ToastModule, SidebarComponent],
   providers: [MessageService],
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
@@ -94,7 +95,7 @@ export class GalleryComponent implements OnInit {
       isFavorite: false,
     },
     {
-      id: 1,
+      id: 3,
       type: 'image',
       url: 'assets/sliderimages/image2.jpg',
       category: 'adventures',
@@ -103,7 +104,7 @@ export class GalleryComponent implements OnInit {
       isFavorite: false,
     },
     {
-      id: 1,
+      id: 4,
       type: 'image',
       url: 'assets/sliderimages/image3.jpg',
       category: 'landscapes',
@@ -111,7 +112,6 @@ export class GalleryComponent implements OnInit {
       loveCount: 0,
       isFavorite: false,
     },
-    // Add more items as needed
   ];
 
   categories: string[] = ['all', 'adventures', 'landscapes', 'wildlife'];
@@ -124,6 +124,7 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
     this.loadGalleryItems();
   }
+
 
   loadGalleryItems() {
     // In a real app, this might be an API call

@@ -95,4 +95,9 @@ export class UsersComponent implements OnInit {
   deleteUser(id: string) {
     this.filteredUsers = this.filteredUsers.filter((u) => u._id !== id);
   }
+  isSidebarVisible: boolean = false;
+
+  toggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible;
+  }
 }

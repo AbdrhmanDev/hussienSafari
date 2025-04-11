@@ -1,4 +1,4 @@
-  import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
   import { CommonModule } from '@angular/common';
   import { TableModule } from 'primeng/table';
   import { InputTextModule } from 'primeng/inputtext';
@@ -16,7 +16,8 @@
   import { HttpClient } from '@angular/common/http';
   import { SidebarComponent } from '../sidebar/sidebar.component';
   import { CalendarModule } from 'primeng/calendar';
-  
+  // import { SidebarService } from '../../services/sidebar.service';
+
   @Component({
     selector: 'app-bookings',
     standalone: true,
@@ -35,11 +36,11 @@
       FormsModule,
       SidebarComponent,
       CalendarModule
-      
     ],
     providers: [ConfirmationService, MessageService],
   })
   export class BookingsComponent implements OnInit {
+    isSidebarVisible: boolean = false;
     bookings: any[] = [];
     filteredBookings: any[] = [];
     selectedStatus: string = '';
@@ -212,7 +213,8 @@
     isSidebarActive: boolean = false;
 
 toggleSidebar() {
-  const sidebarEl = document.querySelector('app-sidebar');
-  sidebarEl?.classList.toggle('active');
+  this.isSidebarVisible = !this.isSidebarVisible;
+  // this.sidebarService.toggleSidebar();
 }
+
   }

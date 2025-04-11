@@ -2,90 +2,146 @@
   display: flex;
   flex-direction: row;
   min-height: 100vh;
+  background: #f8f9fa;
 
-  // زر الهامبورجر
   .hamburger-btn {
     display: none;
     position: fixed;
     top: 1rem;
     left: 1rem;
     z-index: 200;
-    background: none;
+    background: white;
     border: none;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f0f2f5;
+    }
 
     @media (max-width: 768px) {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  // السايدبار
   app-sidebar {
     width: 250px;
     flex-shrink: 0;
-    background: #f9f9f9;
-    border-right: 1px solid #ddd;
+    background: white;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
-    transition: left 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
 
     @media (max-width: 768px) {
-      left: -250px;
+      transform: translateX(-100%);
 
       &.active {
-        left: 0;
+        transform: translateX(0);
       }
     }
   }
 
-  // المحتوى الرئيسي
-  .main-content,
   .add-trip-wrapper {
     flex: 1;
     margin-left: 250px;
     padding: 2rem;
-    background: #fefefe;
-    transition: margin-left 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     @media (max-width: 768px) {
       margin-left: 0;
       padding: 1rem;
     }
+
+    .p-steps {
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+
+      @media (max-width: 576px) {
+        .p-steps-number {
+          font-size: 1rem;
+          width: 2rem;
+          height: 2rem;
+          line-height: 2rem;
+        }
+      }
+    }
+
+    .p-fieldset {
+      background: white;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: none;
+
+      .p-fieldset-legend {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+      }
+    }
+
+    .field {
+      margin-bottom: 1.5rem;
+
+      .p-float-label {
+        input, textarea {
+          width: 100%;
+          border-radius: 8px;
+        }
+      }
+    }
+
+    .p-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: none;
+    }
+
+    .media-preview {
+      img, video {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+    }
+
+    .p-fileupload {
+      border-radius: 12px;
+      border: 2px dashed #e0e0e0;
+      background: #fafafa;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #2196F3;
+        background: #f5f9ff;
+      }
+    }
   }
 
-  // عند فتح السايدبار في الشاشات الصغيرة
   &.sidebar-open {
-    .main-content,
     .add-trip-wrapper {
       @media (max-width: 768px) {
         margin-left: 250px;
       }
     }
-  }
-}
-
-// ستايل خاص بفورم إضافة الرحلة
-.add-trip-wrapper {
-  .p-fieldset {
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-  }
-
-  .field {
-    margin-bottom: 2rem;
-  }
-
-  .p-card {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-  }
-
-  .media-preview img,
-  .media-preview video {
-    border-radius: 8px;
   }
 }

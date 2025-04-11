@@ -2,8 +2,9 @@
     <button class="hamburger-btn" (click)="toggleSidebar()">
         <i class="pi pi-bars"></i>
     </button>
-
-    <app-sidebar></app-sidebar>
+    
+    <div class="mobile-overlay" *ngIf="isSidebarVisible" (click)="toggleSidebar()"></div>
+    <app-sidebar [ngClass]="{ 'active': isSidebarVisible }"></app-sidebar>
 
     <div class="main-content">
         <div class="flex justify-content-between align-items-center mb-4">
@@ -29,10 +30,6 @@
                 <p-dropdown name="categories" [options]="categories" [(ngModel)]="selectedCategory"
                     placeholder="Category" (onChange)="filterBookings()" class="w-full" />
             </div>
-            <!-- <div class="col-12 md:col-4">
-                <p-calendar  [(ngModel)]="dateRange" selectionMode="range" placeholder="Filter by date"
-                    (onSelect)="filterBookings()" showIcon class="w-full" />
-            </div> -->
         </div>
 
         <p-table [value]="filteredBookings" [paginator]="true" [rows]="5" responsiveLayout="scroll">
@@ -61,8 +58,6 @@
                     <td>
                         <div class="flex gap-2">
                             <button pButton icon="pi pi-eye" class="p-button-text" (click)="viewBooking(b)"></button>
-                            <!-- <button pButton icon="pi pi-pencil" class="p-button-text p-button-info"
-                                (click)="editBooking(b._id)"></button> -->
                             <button pButton icon="pi pi-trash" class="p-button-text p-button-danger"
                                 (click)="deleteBooking(b._id)"></button>
                         </div>
@@ -129,10 +124,5 @@
                 </div>
             </ng-container>
         </p-dialog>
-
-
-        <!-- <div class="mt-5">
-            <p-chart type="pie" [data]="chartData" [options]="chartOptions"></p-chart>
-        </div> -->
     </div>
 </div>

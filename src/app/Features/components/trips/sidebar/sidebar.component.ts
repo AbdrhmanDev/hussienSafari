@@ -38,6 +38,11 @@ export class SidebarComponent implements OnInit {
         routerLink: ['/bookings'],
       },
       {
+        label: 'users',
+        icon: 'pi pi-users',
+        routerLink: ['/users'],
+      },
+      {
         label: 'Settings',
         icon: 'pi pi-cog',
         routerLink: ['/settings'],
