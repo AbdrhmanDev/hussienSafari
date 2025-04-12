@@ -1,124 +1,32 @@
-:host {
-  display: block;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
-.promo-container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-.parallax-section {
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.parallax-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.parallax-overlay {
-  position: relative;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-}
-
-.content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  animation: fadeIn 1.5s ease-in-out;
-  position: relative;
-  z-index: 2;
-}
-
-.title {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  letter-spacing: 1px;
-  animation: titleAnimation 1s ease-out 0.5s both;
-}
-
-.subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  opacity: 0.9;
-  line-height: 1.6;
-  animation: subtitleAnimation 1s ease-out 1s both;
-}
-
-.cta-container {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 2.5rem;
-  animation: ctaAnimation 1s ease-out 1.5s both;
-}
-
-:host ::ng-deep {
-  .p-button-rounded {
-    padding: 1rem 2rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    &:active {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    &.p-button-outlined {
-      border-color: white;
-      color: white;
-      border-width: 2px;
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-    }
-  }
-}
-
 .promo-section {
   position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.6);
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full viewport width */
+  overflow: hidden; /* Prevent scrolling or overflow */
 }
 
 video {
+  position: fixed; /* Fix the video in place */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%) rotate(-90deg);/* Adjust for centering */
+  min-width: 100%; /* Ensure full width coverage */
+  min-height: 100%; /* Ensure full height coverage */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Cover the entire section without distortion */
+  z-index: -1; /* Keep the video in the background */
+
+}
+
+.background-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%) rotate(-90deg) scale(0.8);
-  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Optional: Add a dark overlay */
+  z-index: 1;
 }
 
 .content {
@@ -157,7 +65,8 @@ video {
   }
 }
 
-.sound-toggle {
+/* Mute Button */
+.mute-btn {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -165,105 +74,15 @@ video {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  padding: 10px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
+  color: white;
 
   &:hover {
     background: rgba(255, 255, 255, 0.3);
   }
-
-  i {
-    color: white;
-    font-size: 1.2rem;
-  }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes titleAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes subtitleAnimation {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 0.9;
-    transform: translateX(0);
-  }
-}
-
-@keyframes ctaAnimation {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .title {
-    font-size: 2.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .cta-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .content {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-
-  :host ::ng-deep {
-    .p-button-rounded {
-      padding: 0.75rem 1.5rem;
-      width: 100%;
-      max-width: 250px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
+.mute-btn i {
+  font-size: 2rem;
 }
