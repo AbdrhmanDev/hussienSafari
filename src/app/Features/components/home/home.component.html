@@ -1,31 +1,6 @@
-<div class="landing-page">
-  <p-carousel
-    [value]="sliderImages"
-    [numVisible]="1"
-    [numScroll]="1"
-    [circular]="true"
-    [autoplayInterval]="5000"
-    class="slider"
-    [showNavigators]="false"
-  >
-    <ng-template let-image pTemplate="item">
-      <div class="slide">
-        <img [src]="image" alt="Adventure Safari" />
-      </div>
-    </ng-template>
-  </p-carousel>
-  <div class="overlay">
-    <h1>Experience the Ultimate Safari Adventure</h1>
-    <p>
-      Discover breathtaking landscapes and unforgettable wildlife encounters
-    </p>
-    <button
-      pButton
-      label="Book Your Adventure"
-      class="p-button-rounded p-button-warning book-now-btn"
-    ></button>
-  </div>
-</div>
+
+<app-promo></app-promo>
+
 
 <div class="featured-tours">
   <h2>Popular Safari Tours</h2>
@@ -83,6 +58,33 @@
     ></button>
   </div>
 </div>
-<app-promo></app-promo>
+<div class="landing-page">
+  <p-carousel
+    [value]="sliderImages"
+    [numVisible]="1"
+    [numScroll]="1"
+    [circular]="true"
+    [autoplayInterval]="5000"
+    class="slider"
+    [showNavigators]="false"
+  >
+    <ng-template let-image pTemplate="item">
+      <div class="slide">
+        <img [src]="image" alt="Adventure Safari" />
+      </div>
+    </ng-template>
+  </p-carousel>
+  <div class="overlay">
+    <h1>Experience the Ultimate Safari Adventure</h1>
+    <p>
+      Discover breathtaking landscapes and unforgettable wildlife encounters
+    </p>
+    <button
+      pButton
+      label="Book Your Adventure"
+      class="p-button-rounded p-button-warning book-now-btn"
+    ></button>
+  </div>
+</div>
 <app-about></app-about>
 <app-gallery></app-gallery>
