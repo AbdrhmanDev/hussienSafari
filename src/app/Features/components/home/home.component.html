@@ -26,17 +26,25 @@
     ></button>
   </div>
 </div>
-<app-about></app-about>
+
 <div class="featured-tours">
   <h2>Popular Safari Tours</h2>
   <div class="tour-grid">
-    <div class="tour-card" *ngFor="let tour of featuredTours">
+    <div class="tour-card" *ngFor="let tour of featuredTours; let i = index">
+      <div class="ribbon">
+        <span>#{{ i + 1 }}</span>
+        <div class="shine"></div>
+      </div>
       <img
         [src]="tour.image"
         [alt]="tour.title"
         onerror="this.src='/assets/trips/placeholder.svg'"
       />
       <div class="tour-info">
+        <div class="rating">
+          <i class="pi pi-star-fill" [style.color]="'#ffd700'"></i>
+          <span>{{ tour.rating }} ({{ tour.reviewCount }} reviews)</span>
+        </div>
         <h3>{{ tour.title }}</h3>
         <p>{{ tour.description }}</p>
         <div class="trip-details">
@@ -53,10 +61,7 @@
             <span>{{ tour.groupSize }}</span>
           </div>
         </div>
-        <div class="rating">
-          <i class="pi pi-star-fill" [style.color]="'#ffd700'"></i>
-          <span>{{ tour.rating }} ({{ tour.reviewCount }} reviews)</span>
-        </div>
+     
         <div class="tour-footer">
           <span class="price">From ${{ tour.price }}</span>
           <button
@@ -78,5 +83,5 @@
     ></button>
   </div>
 </div>
-
+<app-about></app-about>
 <app-gallery></app-gallery>

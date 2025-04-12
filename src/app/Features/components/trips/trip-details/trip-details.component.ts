@@ -8,13 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { TagModule } from 'primeng/tag';
 import { ActivatedRoute } from '@angular/router';
 import { Trip, TripsService } from '../../../services/trips.service';
-
-interface Review {
-  userName: string;
-  date: string;
-  rating: number;
-  comment: string;
-}
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
+import { ReviewsComponent } from '../../reviews/reviews.component';
+import { AddReviewsComponent } from '../../reviews/add-reviews/add-reviews.component';
+import { Review } from '../../../services/reviews.service';
+import 'primeicons/primeicons.css';
 
 @Component({
   selector: 'app-trip-details',
@@ -27,6 +28,12 @@ interface Review {
     RatingModule,
     FormsModule,
     TagModule,
+    CalendarModule,
+    InputNumberModule,
+    OverlayPanelModule,
+    DropdownModule,
+    ReviewsComponent,
+    AddReviewsComponent,
   ],
   templateUrl: './trip-details.component.html',
   styleUrls: ['./trip-details.component.scss'],
@@ -36,52 +43,35 @@ export class TripDetailsComponent implements OnInit {
   images: { type: 'image'; url: string }[] = []; // Array for images
   videos: { type: 'video'; url: string }[] = []; // Array for videos
   activeVideo: string | null = null; // Track the currently playing video
+  currentIndex = 0;
+  showReviewForm = false; // Control the visibility of the floating review form
 
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
-      numVisible: 5,
+      numVisible: 4,
+      thumbnailsPosition: 'left',
     },
     {
       breakpoint: '768px',
       numVisible: 3,
+      thumbnailsPosition: 'bottom',
     },
     {
       breakpoint: '560px',
       numVisible: 1,
+      thumbnailsPosition: 'bottom',
     },
   ];
 
-  reviews: Review[] = [
-    {
-      userName: 'John Doe',
-      date: '2024-01-15',
-      rating: 5,
-      comment:
-        'Amazing safari experience! The guides were knowledgeable and we saw incredible wildlife.',
-    },
-    {
-      userName: 'Jane Smith',
-      date: '2024-01-10',
-      rating: 4,
-      comment:
-        'Great trip overall. The accommodations were comfortable and the scenery was breathtaking.',
-    },
-    {
-      userName: 'Mike Johnson',
-      date: '2024-01-05',
-      rating: 5,
-      comment:
-        'Once in a lifetime experience! The staff was professional and the wildlife sightings were spectacular.',
-    },
-    {
-      userName: 'Sarah Wilson',
-      date: '2024-01-01',
-      rating: 4,
-      comment:
-        'Wonderful adventure with great attention to detail. Would highly recommend!',
-    },
-  ];
+  selectedDate: Date = new Date();
+  minDate: Date = new Date();
+  adults: number = 2;
+  children: number = 0;
+
+  get totalTravelers(): number {
+    return this.adults + this.children;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -128,6 +118,57 @@ export class TripDetailsComponent implements OnInit {
     this.showHeroVideo = false;
   }
 
+  toggleReviewForm(): void {
+    this.showReviewForm = !this.showReviewForm;
+    // Add a class to the body to prevent scrolling when the form is open
+    if (this.showReviewForm) {
+      document.body.classList.add('review-form-open');
+    } else {
+      document.body.classList.remove('review-form-open');
+    }
+  }
+
+  onReviewAdded(review: Review): void {
+    // Close the review form after submission
+    this.showReviewForm = false;
+    document.body.classList.remove('review-form-open');
+
+    // Show a success notification
+    this.showSuccessNotification();
+  }
+
+  showSuccessNotification(): void {
+    const notification = document.createElement('div');
+    notification.className = 'notification success';
+    notification.innerHTML = `
+      <div class="notification-content">
+        <div class="notification-icon">
+          <i class="pi pi-check-circle"></i>
+        </div>
+        <div class="notification-text">
+          <h4>Success!</h4>
+          <p>Your review has been added successfully</p>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Force reflow
+    notification.offsetHeight;
+
+    // Add show class
+    notification.classList.add('show');
+
+    // Remove notification after animation (increased display time)
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 500);
+    }, 4000);
+  }
+
   stopVideo(): void {
     if (this.activeVideo) {
       const videoElement = document.querySelector(
@@ -154,5 +195,21 @@ export class TripDetailsComponent implements OnInit {
     const basePath = 'assets/videos/'; // Adjust this path to match your project structure
     const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '.jpg');
     return `${basePath}${videoFileName}`;
+  }
+
+  setActiveImage(index: number) {
+    this.currentIndex = index;
+  }
+
+  prevImage() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
+  nextImage() {
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+    }
   }
 }

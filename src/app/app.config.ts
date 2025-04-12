@@ -10,11 +10,18 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
     provideAnimationsAsync(),
     provideHttpClient(),
         providePrimeNG({ 
             theme: {
-                preset: Aura
+                preset: Aura,
+                options: {
+                  tokens: {
+                    primaryColor: '#00BFA5', // ← Your custom primary color
+                    primaryTextColor: '#ffffff'
+                  }
+                }
             }
         })
   ],

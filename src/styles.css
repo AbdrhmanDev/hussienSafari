@@ -3,6 +3,12 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.min.css";
 
+
+/* Prevent scrolling when modals are open */
+body.review-form-open {
+  overflow: hidden;
+}
+
 .sticky-navbar {
   position: sticky;
   top: 0;
@@ -86,4 +92,40 @@
 .book-now-btn {
   font-size: 1.5rem;
   padding: 1rem 2rem;
+}
+
+/* Success Notification Styles */
+.success-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(90deg, #00bfa5, #00897b);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 191, 165, 0.4);
+  z-index: 2000;
+  transform: translateX(120%);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.success-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notification-content i {
+  font-size: 1.5rem;
+}
+
+.notification-content span {
+  font-weight: 500;
+  font-size: 1rem;
 }

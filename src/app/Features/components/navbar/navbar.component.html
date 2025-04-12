@@ -1,17 +1,59 @@
-<!-- <div class="navbar-container">
+<div
+  class="navbar-container"
+  [class.scrolled]="isScrolled"
+  [class.visible]="isVisible"
+>
   <p-menubar [model]="menuItems" class="sticky-navbar">
     <ng-template pTemplate="start">
-      <img src="assets/logopng.png" class="navbar-logo" />
+      <img
+        src="assets/logopng.png"
+        class="navbar-logo"
+        [class.shrink]="isScrolled"
+      />
     </ng-template>
     <ng-template pTemplate="end">
-      <div class="navbar-buttons">
-        <i class="pi pi-user user-icon"></i>
-        <button
-          pButton
-          label="Sign Up"
-          class="p-button-outlined p-button-warning mr-2"
-        ></button>
-        <button pButton label="Login" class="p-button-warning"></button>
+      <div class="navbar-end">
+        <p-dropdown
+          [options]="languages"
+          [(ngModel)]="selectedLanguage"
+          optionLabel="label"
+          [style]="{ 'min-width': '80px' }"
+          styleClass="language-dropdown"
+        >
+          <ng-template pTemplate="selectedItem">
+            <div class="language-option">
+              <img
+                src="assets/flags/{{ selectedLanguage.code }}.png"
+                class="flag-icon"
+              />
+              <span>{{ selectedLanguage.code.toUpperCase() }}</span>
+            </div>
+          </ng-template>
+          <ng-template let-lang pTemplate="item">
+            <div class="language-option">
+              <img src="assets/flags/{{ lang.code }}.png" class="flag-icon" />
+              <span>{{ lang.code.toUpperCase() }}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+
+        <div class="auth-buttons" *ngIf="!isLoggedIn">
+          <button
+            pButton
+            label="Sign Up"
+            class="p-button-outlined p-button-warning"
+          ></button>
+          <button pButton label="Login" class="p-button-warning"></button>
+        </div>
+
+        <div class="user-menu" *ngIf="isLoggedIn">
+          <p-menu #menu [popup]="true" [model]="userMenuItems"></p-menu>
+          <p-avatar
+            image="assets/user.jpg"
+            shape="circle"
+            (click)="menu.toggle($event)"
+          ></p-avatar>
+        </div>
       </div>
     </ng-template>
   </p-menubar>

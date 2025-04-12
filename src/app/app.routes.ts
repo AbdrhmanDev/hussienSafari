@@ -15,6 +15,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'trips', component: TripsComponent },
   { path: 'details/:id', component: TripDetailsComponent },
+
   { path: 'addtrip', component: AddTripComponent },
   { path: 'triplist', component: TripListComponent },
   { path: 'edittrip/:id', component: EditTripComponent },
