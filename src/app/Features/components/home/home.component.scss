@@ -269,6 +269,20 @@
   }
 }
 
+.scroll-container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.promo-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  perspective: 1px;
+  transform-style: preserve-3d;
+}
+
 @keyframes shine {
   0% {
     transform: translateX(-100%);

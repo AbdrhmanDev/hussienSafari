@@ -6,11 +6,12 @@ import { RouterLink } from '@angular/router';
 import { TripsService, Trip } from '../../services/trips.service';
 import { AboutComponent } from "../about/about.component";
 import { GalleryComponent } from "../gallery/gallery.component";
+import { PromoComponent } from "../promo/promo.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CarouselModule, ButtonModule, RouterLink, AboutComponent, GalleryComponent],
+  imports: [CommonModule, CarouselModule, ButtonModule, RouterLink, AboutComponent, GalleryComponent, PromoComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

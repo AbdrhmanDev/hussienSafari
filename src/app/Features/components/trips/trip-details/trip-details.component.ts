@@ -160,13 +160,13 @@ export class TripDetailsComponent implements OnInit {
     // Add show class
     notification.classList.add('show');
 
-    // Remove notification after animation (increased display time)
+    // Remove notification after animation
     setTimeout(() => {
       notification.classList.remove('show');
       setTimeout(() => {
         document.body.removeChild(notification);
-      }, 500);
-    }, 4000);
+      }, 300);
+    }, 3000);
   }
 
   stopVideo(): void {

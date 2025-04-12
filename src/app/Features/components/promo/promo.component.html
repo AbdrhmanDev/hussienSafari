@@ -1,0 +1,13 @@
+<section class="promo-section">
+  <video #videoPlayer autoplay loop muted>
+    <source src="assets/promo/promo.mp4" type="video/mp4" />
+  </video>
+  <button class="sound-toggle" (click)="toggleSound()">
+    <i class="pi" [ngClass]="isMuted ? 'pi-volume-off' : 'pi-volume-up'"></i>
+  </button>
+  <div class="content">
+    <h2>Experience the Adventure</h2>
+    <p>Discover the beauty of Safari with us</p>
+    <button pButton label="Explore More" class="p-button-rounded"></button>
+  </div>
+</section>
