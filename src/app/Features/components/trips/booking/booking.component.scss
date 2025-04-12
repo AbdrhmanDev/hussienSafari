@@ -1,0 +1,143 @@
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+    > * {
+        flex: 1 1 calc(50% - 1rem);
+        min-width: 300px;
+    }
+    
+    @media (max-width: 992px) {
+        > * {
+            flex: 1 1 100%;
+        }
+    }
+}
+
+    ::ng-deep {
+        .p-steps {
+            margin-bottom: 2rem;
+            .p-steps-item {
+                position: relative;
+                
+                &:not(:last-child):after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: calc(50% + 2rem);
+                    width: calc(100% - 4rem);
+                    height: 2px;
+                    background: #e9ecef;
+                    transform: translateY(-50%);
+                    transition: background-color 0.3s;
+                }
+                
+                .p-menuitem-link {
+                    display: flex;
+                    align-items: center;
+                    padding: 1.5rem;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    background: transparent;
+                    
+                    &:hover {
+                        background-color: rgba(var(--primary-color-rgb), 0.05);
+                    }
+                    
+                    .p-steps-number {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        border-radius: 50%;
+                        background-color: #ffffff;
+                        color: #6c757d;
+                        border: 2px solid #e9ecef;
+                        margin-right: 1rem;
+                        font-weight: 600;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                        transition: all 0.3s ease;
+                    }
+
+                    .p-steps-title {
+                        font-weight: 500;
+                        color: #6c757d;
+                        transition: color 0.3s;
+                    }
+                }
+
+                &.p-highlight {
+                    .p-menuitem-link {
+                        .p-steps-number {
+                            background-color: var(--primary-color);
+                            color: #ffffff;
+                            border-color: var(--primary-color);
+                            transform: scale(1.1);
+                            box-shadow: 0 4px 8px rgba(var(--primary-color-rgb), 0.25);
+                        }
+                        
+                        .p-steps-title {
+                            color: var(--primary-color);
+                            font-weight: 600;
+                        }
+                    }
+                    
+                    &:after {
+                        background: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        .p-card {
+            .p-card-header {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: var(--text-color);
+                padding: 1rem;
+                background-color: var(--surface-card);
+                border-bottom: 1px solid var(--surface-border);
+            }
+
+            .p-card-content {
+                padding: 2rem;
+            }
+        }
+
+        .p-float-label {
+            input, textarea {
+                width: 100%;
+            }
+
+            label {
+                color: var(--text-color-secondary);
+            }
+        }
+
+        .p-inputtext:enabled:focus {
+            box-shadow: 0 0 0 2px var(--primary-color-light);
+            border-color: var(--primary-color);
+        }
+    }
+
+    .step-content {
+        min-height: 400px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+/* Remove the extra closing brace as it's causing a syntax error */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

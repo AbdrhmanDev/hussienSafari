@@ -1,0 +1,201 @@
+<div class="booking-container p-4">
+    <div class="grid">
+        <!-- Left Section: Contact Form -->
+        <div class="col-12 md:col-8">
+            <div class="contact-form-section">
+                <p-steps [model]="steps" [(activeIndex)]="activeStepIndex" [readonly]="false" class="mb-5"></p-steps>
+                <div [ngClass]="{'hidden': activeStepIndex !== 0}" class="step-content">
+                    <h2>Contact details</h2>
+                    <p class="text-gray-600 mb-4">We'll use this information to send you confirmation and updates about your booking</p>
+                
+                <form [formGroup]="bookingForm" class="booking-form">
+                    <div class="login-signup-section bg-gray-100 p-3 mb-4 border-round">
+                        <i class="pi pi-user mr-2"></i>
+                        <span>Log in or Sign-up for a faster checkout and to redeem available Viator Rewards</span>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col-12 md:col-6 mb-4">
+                            <label for="firstName" class="block mb-2">First name</label>
+                            <input id="firstName" type="text" pInputText formControlName="firstName" class="w-full">
+                        </div>
+                        <div class="col-12 md:col-6 mb-4">
+                            <label for="lastName" class="block mb-2">Last name</label>
+                            <input id="lastName" type="text" pInputText formControlName="lastName" class="w-full">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label for="email" class="block mb-2">Email</label>
+                            <input id="email" type="email" pInputText formControlName="email" class="w-full">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label for="phone" class="block mb-2">Phone number</label>
+                            <div class="p-inputgroup">
+                                <span class="p-inputgroup-addon">
+                                    <i class="pi pi-phone"></i>
+                                    (+20) Egypt
+                                </span>
+                                <input id="phone" type="tel" pInputText formControlName="phone" class="w-full">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="newsletter-section mb-4">
+                        <p-checkbox formControlName="newsletter" [binary]="true" label="Get emails with special offers, expiration tips, and other updates from Viator. You can unsubscribe at any time."></p-checkbox>
+                    </div>
+
+                    <!-- Step 2: Activity Details -->
+                    <div [ngClass]="{'hidden': activeStepIndex !== 1}" class="step-content">
+                        <div class="card mb-4">
+                            <div class="card-header">Activity Details</div>
+                            <div class="grid">
+                                <div class="col-12 md:col-6">
+                                    <span class="p-float-label mb-4">
+                                        <!-- <p-calendar id="date" formControlName="date" [showIcon]="true" class="w-full"></p-calendar> -->
+                                        <label for="date">Select Date</label>
+                                    </span>
+                                    <small class="p-error" *ngIf="bookingForm.get('date')?.invalid && bookingForm.get('date')?.touched">
+                                        Please select a date
+                                    </small>
+                                </div>
+                                <div class="col-12 md:col-6">
+                                    <span class="p-float-label mb-4">
+                                        <!-- <p-inputNumber id="numberOfPeople" formControlName="numberOfPeople" [min]="1" [showButtons]="true" class="w-full"></p-inputNumber> -->
+                                        <label for="numberOfPeople">Number of People</label>
+                                    </span>
+                                    <small class="p-error" *ngIf="bookingForm.get('numberOfPeople')?.invalid && bookingForm.get('numberOfPeople')?.touched">
+                                        Please enter number of people
+                                    </small>
+                                </div>
+                                <div class="col-12">
+                                    <span class="p-float-label mb-4">
+                                        <textarea id="specialRequests" pInputTextarea formControlName="specialRequests" [rows]="3" class="w-full"></textarea>
+                                        <label for="specialRequests">Special Requests (Optional)</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment Details -->
+                    <div [ngClass]="{'hidden': activeStepIndex !== 2}" class="step-content">
+                        <p-card header="Payment Details" styleClass="mb-4">
+                            <div class="grid">
+                                <div class="col-12 md:col-6">
+                                    <span class="p-float-label mb-4">
+                                        <input id="cardNumber" type="text" pInputText formControlName="cardNumber" class="w-full">
+                                        <label for="cardNumber">Card Number</label>
+                                    </span>
+                                    <small class="p-error" *ngIf="bookingForm.get('cardNumber')?.invalid && bookingForm.get('cardNumber')?.touched">
+                                        Please enter a valid card number
+                                    </small>
+                                </div>
+                                <div class="col-12 md:col-3">
+                                    <span class="p-float-label mb-4">
+                                        <input id="expiryDate" type="text" pInputText formControlName="expiryDate" placeholder="MM/YY" class="w-full">
+                                        <label for="expiryDate">Expiry Date</label>
+                                    </span>
+                                    <small class="p-error" *ngIf="bookingForm.get('expiryDate')?.invalid && bookingForm.get('expiryDate')?.touched">
+                                        Please enter expiry date
+                                    </small>
+                                </div>
+                                <div class="col-12 md:col-3">
+                                    <span class="p-float-label mb-4">
+                                        <input id="cvv" type="password" pInputText formControlName="cvv" maxlength="4" class="w-full">
+                                        <label for="cvv">CVV</label>
+                                    </span>
+                                    <small class="p-error" *ngIf="bookingForm.get('cvv')?.invalid && bookingForm.get('cvv')?.touched">
+                                        Please enter a valid CVV
+                                    </small>
+                                </div>
+                            </div>
+                        </p-card>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-content-between mt-4">
+                        <button pButton type="button" label="Previous" icon="pi pi-chevron-left" 
+                                [disabled]="activeStepIndex === 0"
+                                (click)="prevStep()"
+                                class="p-button-secondary"></button>
+                        
+                        <button pButton type="button" 
+                                [label]="activeStepIndex === 2 ? 'Submit' : 'Next'"
+                                [icon]="activeStepIndex === 2 ? 'pi pi-check' : 'pi pi-chevron-right'"
+                                [iconPos]="activeStepIndex === 2 ? 'left' : 'right'"
+                                (click)="activeStepIndex === 2 ? onSubmit() : goToNextStep()"
+                                class="p-button-primary"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Section: Booking Summary -->
+        <div class="col-12 md:col-4">
+            <div class="booking-summary p-4 border-round-lg surface-card">
+                <div class="timer-section bg-pink-50 p-3 mb-4 border-round flex align-items-center">
+                    <i class="pi pi-clock mr-2"></i>
+                    <span>Holding your spot for 19:49 minutes</span>
+                </div>
+
+                <div class="trip-details mb-4">
+                    <div class="flex mb-3">
+                        <img src="assets/trips/trip1.jpg" alt="Trip" class="trip-image mr-3" style="width: 80px; height: 60px; object-fit: cover;">
+                        <h3 class="m-0">4 hours private speedboat & snorkeling in the red sea</h3>
+                    </div>
+
+                    <div class="trip-info">
+                        <div class="flex justify-content-between align-items-center mb-2">
+                            <div class="flex align-items-center">
+                                <i class="pi pi-users mr-2"></i>
+                                <span>2 Travelers</span>
+                            </div>
+                            <span class="price">$300.00</span>
+                        </div>
+
+                        <div class="flex align-items-center mb-2">
+                            <i class="pi pi-calendar mr-2"></i>
+                            <span>Sat, Apr 12, 2025 • 8:00 AM</span>
+                        </div>
+
+                        <div class="flex align-items-center mb-4">
+                            <i class="pi pi-info-circle mr-2"></i>
+                            <span>Non-refundable</span>
+                        </div>
+
+                        <div class="promo-code-section mb-4">
+                            <p-accordion>
+                                <p-accordionTab header="Enter Promo Code">
+                                    <div class="p-inputgroup">
+                                        <input type="text" pInputText placeholder="Enter code">
+                                        <button type="button" pButton label="Apply"></button>
+                                    </div>
+                                </p-accordionTab>
+                            </p-accordion>
+                        </div>
+
+                        <div class="total-price-section border-top-1 surface-border pt-3">
+                            <div class="flex justify-content-between">
+                                <span class="font-bold">Total price (USD):</span>
+                                <span class="font-bold text-xl">$300.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-confidence">
+                    <h4>Book with confidence</h4>
+                    <div class="flex align-items-center mb-2">
+                        <span class="excellent-badge bg-green-100 text-green-900 p-1 border-round mr-2">Excellent</span>
+                        <img src="assets/trustpilot-logo.svg" alt="Trustpilot" style="height: 20px">
+                    </div>
+                    <p class="text-sm text-gray-600">Based on 253,530 traveler reviews</p>
+
+                    <div class="support-section mt-3">
+                        <h5>24/7 global support</h5>
+                        <p class="text-sm text-gray-600">Our award-winning customer service team is here to help</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

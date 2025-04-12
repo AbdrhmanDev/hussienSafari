@@ -8,6 +8,8 @@ import { TripListComponent } from './Features/components/trips/trip-list/trip-li
 import { EditTripComponent } from './Features/components/trips/edit-trip/edit-trip.component';
 import { BookingsComponent } from './Features/components/trips/bookings/bookings.component';
 import { UsersComponent } from './Features/components/trips/users/users.component';
+import { BookingComponent } from './Features/components/trips/booking/booking.component';
+// import { BookingStepperComponent } from './Features/components/app-booking-stepper/app-booking-stepper.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,5 +20,6 @@ export const routes: Routes = [
   { path: 'edittrip/:id', component: EditTripComponent },
   { path: 'bookings', component: BookingsComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'ss', component: BookingComponent },
   { path: '**', redirectTo: '' }, // Default route
 ];
