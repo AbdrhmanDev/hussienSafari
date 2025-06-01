@@ -38,13 +38,19 @@
                     <p>{{ activity.description }}</p>
                     <div class="activity-meta">
                       <p-tag
-                        [value]="activity.type === 'hussein-tour' ? 'Hussein Tour' : 'Suggested'"
-                        [severity]="activity.type === 'hussein-tour' ? 'warn' : 'info'"
+                        [value]="
+                          activity.type === 'hussein-tour'
+                            ? 'Hussein Tour'
+                            : 'Suggested'
+                        "
+                        [severity]="
+                          activity.type === 'hussein-tour' ? 'warn' : 'info'
+                        "
                       >
                       </p-tag>
                       <span class="duration">
                         <i class="pi pi-clock"></i>
-                        {{activity.duration}}
+                        {{ activity.duration }}
                       </span>
                     </div>
                   </div>
@@ -97,74 +103,85 @@
     <p-tabPanel header="2 Days Experience">
       <div class="itinerary-container">
         <div class="timeline-wrapper">
-          <div *ngFor="let day of [1, 2]" class="day-section">
-            <h3 class="day-header">Day {{ day }}</h3>
-            <p-timeline [value]="getTwoDayItineraryForDay(day)">
-              <ng-template pTemplate="marker" let-activity>
-                <span
-                  class="custom-marker"
-                  [ngClass]="getActivityStatusClass(activity.type)"
-                >
-                  <i
-                    class="pi"
-                    [ngClass]="
-                      activity.type === 'hussein-tour'
-                        ? 'pi-compass'
-                        : 'pi-map-marker'
-                    "
-                  ></i>
-                </span>
-              </ng-template>
+          <p-tabView>
+            <p-tabPanel *ngFor="let day of [1, 2]" [header]="'Day ' + day">
+              <div class="day-content">
+                <p-timeline [value]="getTwoDayItineraryForDay(day)">
+                  <ng-template pTemplate="marker" let-activity>
+                    <span
+                      class="custom-marker"
+                      [ngClass]="getActivityStatusClass(activity.type)"
+                    >
+                      <i
+                        class="pi"
+                        [ngClass]="
+                          activity.type === 'hussein-tour'
+                            ? 'pi-compass'
+                            : 'pi-map-marker'
+                        "
+                      ></i>
+                    </span>
+                  </ng-template>
 
-              <ng-template pTemplate="content" let-activity>
-                <p-card [style]="{ 'margin-bottom': '2rem' }">
-                  <div class="activity-content">
-                    <div class="activity-info">
-                      <div class="time-tag">
-                        <i class="pi pi-clock"></i>
-                        <span>{{ activity.time }}</span>
+                  <ng-template pTemplate="content" let-activity>
+                    <p-card [style]="{ 'margin-bottom': '1rem' }">
+                      <div class="activity-content">
+                        <div class="activity-info">
+                          <div class="time-tag">
+                            <i class="pi pi-clock"></i>
+                            <span>{{ activity.time }}</span>
+                          </div>
+                          <h3>{{ activity.activity }}</h3>
+                          <p>{{ activity.description }}</p>
+                          <div class="activity-meta">
+                            <p-tag
+                              [value]="
+                                activity.type === 'hussein-tour'
+                                  ? 'Hussein Tour'
+                                  : 'Suggested'
+                              "
+                              [severity]="
+                                activity.type === 'hussein-tour'
+                                  ? 'warn'
+                                  : 'info'
+                              "
+                            >
+                            </p-tag>
+                            <span class="duration">
+                              <i class="pi pi-clock"></i>
+                              {{ activity.duration }}
+                            </span>
+                          </div>
+                        </div>
+                        <img
+                          *ngIf="activity.image"
+                          [src]="activity.image"
+                          [alt]="activity.activity"
+                          class="activity-image"
+                          (error)="handleImageError($event)"
+                        />
                       </div>
-                      <h3>{{ activity.activity }}</h3>
-                      <p>{{ activity.description }}</p>
-                      <div class="activity-meta">
-                        <p-tag
-                          [value]="activity.type === 'hussein-tour' ? 'Hussein Tour' : 'Suggested'"
-                          [severity]="activity.type === 'hussein-tour' ? 'warn' : 'info'"
-                        >
-                        </p-tag>
-                        <span class="duration">
-                          <i class="pi pi-clock"></i>
-                          {{activity.duration}}
-                        </span>
+                      <div
+                        class="action-buttons"
+                        *ngIf="activity.type === 'hussein-tour'"
+                      >
+                        <button
+                          pButton
+                          label="Book This Activity"
+                          class="p-button-warning"
+                        ></button>
+                        <button
+                          pButton
+                          label="Learn More"
+                          class="p-button-outlined p-button-warning"
+                        ></button>
                       </div>
-                    </div>
-                    <img
-                      *ngIf="activity.image"
-                      [src]="activity.image"
-                      [alt]="activity.activity"
-                      class="activity-image"
-                      (error)="handleImageError($event)"
-                    />
-                  </div>
-                  <div
-                    class="action-buttons"
-                    *ngIf="activity.type === 'hussein-tour'"
-                  >
-                    <button
-                      pButton
-                      label="Book This Activity"
-                      class="p-button-warning"
-                    ></button>
-                    <button
-                      pButton
-                      label="Learn More"
-                      class="p-button-outlined p-button-warning"
-                    ></button>
-                  </div>
-                </p-card>
-              </ng-template>
-            </p-timeline>
-          </div>
+                    </p-card>
+                  </ng-template>
+                </p-timeline>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
         </div>
 
         <div class="itinerary-summary">
@@ -188,74 +205,85 @@
     <p-tabPanel header="3 Days Adventure">
       <div class="itinerary-container">
         <div class="timeline-wrapper">
-          <div *ngFor="let day of [1, 2, 3]" class="day-section">
-            <h3 class="day-header">Day {{ day }}</h3>
-            <p-timeline [value]="getThreeDayItineraryForDay(day)">
-              <ng-template pTemplate="marker" let-activity>
-                <span
-                  class="custom-marker"
-                  [ngClass]="getActivityStatusClass(activity.type)"
-                >
-                  <i
-                    class="pi"
-                    [ngClass]="
-                      activity.type === 'hussein-tour'
-                        ? 'pi-compass'
-                        : 'pi-map-marker'
-                    "
-                  ></i>
-                </span>
-              </ng-template>
+          <p-tabView>
+            <p-tabPanel *ngFor="let day of [1, 2, 3]" [header]="'Day ' + day">
+              <div class="day-content">
+                <p-timeline [value]="getThreeDayItineraryForDay(day)">
+                  <ng-template pTemplate="marker" let-activity>
+                    <span
+                      class="custom-marker"
+                      [ngClass]="getActivityStatusClass(activity.type)"
+                    >
+                      <i
+                        class="pi"
+                        [ngClass]="
+                          activity.type === 'hussein-tour'
+                            ? 'pi-compass'
+                            : 'pi-map-marker'
+                        "
+                      ></i>
+                    </span>
+                  </ng-template>
 
-              <ng-template pTemplate="content" let-activity>
-                <p-card [style]="{ 'margin-bottom': '2rem' }">
-                  <div class="activity-content">
-                    <div class="activity-info">
-                      <div class="time-tag">
-                        <i class="pi pi-clock"></i>
-                        <span>{{ activity.time }}</span>
+                  <ng-template pTemplate="content" let-activity>
+                    <p-card [style]="{ 'margin-bottom': '1rem' }">
+                      <div class="activity-content">
+                        <div class="activity-info">
+                          <div class="time-tag">
+                            <i class="pi pi-clock"></i>
+                            <span>{{ activity.time }}</span>
+                          </div>
+                          <h3>{{ activity.activity }}</h3>
+                          <p>{{ activity.description }}</p>
+                          <div class="activity-meta">
+                            <p-tag
+                              [value]="
+                                activity.type === 'hussein-tour'
+                                  ? 'Hussein Tour'
+                                  : 'Suggested'
+                              "
+                              [severity]="
+                                activity.type === 'hussein-tour'
+                                  ? 'warn'
+                                  : 'info'
+                              "
+                            >
+                            </p-tag>
+                            <span class="duration">
+                              <i class="pi pi-clock"></i>
+                              {{ activity.duration }}
+                            </span>
+                          </div>
+                        </div>
+                        <img
+                          *ngIf="activity.image"
+                          [src]="activity.image"
+                          [alt]="activity.activity"
+                          class="activity-image"
+                          (error)="handleImageError($event)"
+                        />
                       </div>
-                      <h3>{{ activity.activity }}</h3>
-                      <p>{{ activity.description }}</p>
-                      <div class="activity-meta">
-                        <p-tag
-                          [value]="activity.type === 'hussein-tour' ? 'Hussein Tour' : 'Suggested'"
-                          [severity]="activity.type === 'hussein-tour' ? 'warn' : 'info'"
-                        >
-                        </p-tag>
-                        <span class="duration">
-                          <i class="pi pi-clock"></i>
-                          {{activity.duration}}
-                        </span>
+                      <div
+                        class="action-buttons"
+                        *ngIf="activity.type === 'hussein-tour'"
+                      >
+                        <button
+                          pButton
+                          label="Book This Activity"
+                          class="p-button-warning"
+                        ></button>
+                        <button
+                          pButton
+                          label="Learn More"
+                          class="p-button-outlined p-button-warning"
+                        ></button>
                       </div>
-                    </div>
-                    <img
-                      *ngIf="activity.image"
-                      [src]="activity.image"
-                      [alt]="activity.activity"
-                      class="activity-image"
-                      (error)="handleImageError($event)"
-                    />
-                  </div>
-                  <div
-                    class="action-buttons"
-                    *ngIf="activity.type === 'hussein-tour'"
-                  >
-                    <button
-                      pButton
-                      label="Book This Activity"
-                      class="p-button-warning"
-                    ></button>
-                    <button
-                      pButton
-                      label="Learn More"
-                      class="p-button-outlined p-button-warning"
-                    ></button>
-                  </div>
-                </p-card>
-              </ng-template>
-            </p-timeline>
-          </div>
+                    </p-card>
+                  </ng-template>
+                </p-timeline>
+              </div>
+            </p-tabPanel>
+          </p-tabView>
         </div>
 
         <div class="itinerary-summary">
