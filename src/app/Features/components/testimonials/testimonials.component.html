@@ -1,0 +1,48 @@
+<section class="testimonials-section">
+  <div class="testimonials-header">
+    <h2>What Our Adventurers Say</h2>
+    <p>Real experiences from our valued customers</p>
+  </div>
+
+  <div class="testimonials-carousel">
+    <p-carousel
+      [value]="testimonials"
+      [numVisible]="3"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]="5000"
+      [responsiveOptions]="responsiveOptions"
+      [showIndicators]="true"
+    >
+      <ng-template let-testimonial pTemplate="item">
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img
+              [src]="testimonial.image"
+              [alt]="testimonial.name"
+              class="user-image"
+            />
+            <div class="user-info">
+              <h3>{{ testimonial.name }}</h3>
+              <span class="location">
+                <i class="pi pi-map-marker"></i> {{ testimonial.location }}
+              </span>
+              <p-rating
+                [ngModel]="testimonial.rating"
+                [readonly]="true"
+              ></p-rating>
+            </div>
+          </div>
+          <div class="tour-type">
+            <i class="pi pi-compass"></i>
+            <span>{{ testimonial.tourType }}</span>
+          </div>
+          <div class="testimonial-content">
+            <i class="pi pi-quote-left quote-icon"></i>
+            <p>{{ testimonial.comment }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</section>

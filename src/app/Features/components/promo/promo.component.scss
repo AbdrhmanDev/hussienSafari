@@ -16,6 +16,11 @@ video {
   height: auto; /* Maintain aspect ratio */
   object-fit: cover; /* Cover the entire section without distortion */
   z-index: -1; /* Keep the video in the background */
+
+  @media (max-width: 768px) {
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.7);
+    min-height: 250%
+  }
 }
 
 .background-overlay {
@@ -41,14 +46,14 @@ video {
   color: white;
 
   h2 {
-    font-size: 4rem;
+    font-size: clamp(2rem, 5vw, 4rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
   p {
-    font-size: 1.8rem;
+    font-size: clamp(1rem, 3vw, 1.8rem);
     margin-bottom: 2.5rem;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   }
@@ -61,10 +66,14 @@ video {
     &:hover {
       transform: scale(1.05);
     }
+
+    @media (max-width: 768px) {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+    }
   }
 }
 
-/* Mute Button */
 .mute-btn {
   position: absolute;
   bottom: 20px;
@@ -80,11 +89,22 @@ video {
   &:hover {
     background: rgba(255, 255, 255, 0.3);
   }
+
+  @media (max-width: 768px) {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px;
+
+    i {
+      font-size: 0.8rem;
+    }
+  }
 }
 
 .mute-btn i {
   font-size: 1rem;
 }
+
 strong {
   position: relative;
   display: inline-block;
@@ -115,5 +135,27 @@ strong {
       transform: scale(1.2);
       transition: all 0.3s ease;
     }
+  }
+}
+
+@media (max-height: 600px) {
+  .content {
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .promo-section {
+    min-height: 100vh;
+  }
+
+  .content {
+    padding: 1rem;
   }
 }

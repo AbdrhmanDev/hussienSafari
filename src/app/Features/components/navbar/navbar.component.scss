@@ -154,7 +154,7 @@
     gap: 1.5rem;
 
     .language-dropdown {
-      min-width: 100px;
+      min-width: 90px;
 
       ::ng-deep .p-dropdown {
         background: transparent;
@@ -325,6 +325,11 @@
 }
 
 @media (max-width: 768px) {
+  .language-option{
+    span{
+      display: none;
+    }
+  }
   .navbar-container {
     ::ng-deep .p-menubar {
       justify-content: space-between;

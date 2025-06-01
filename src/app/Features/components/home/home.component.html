@@ -1,6 +1,4 @@
-
 <app-promo></app-promo>
-
 
 <div class="featured-tours">
   <h2>Popular Safari Tours</h2>
@@ -22,7 +20,7 @@
         </div>
         <h3>{{ tour.title }}</h3>
         <p>{{ tour.description }}</p>
-        <div class="trip-details">
+        <!-- <div class="trip-details">
           <div class="detail">
             <i class="pi pi-clock"></i>
             <span>{{ tour.duration }}</span>
@@ -35,9 +33,9 @@
             <i class="pi pi-users"></i>
             <span>{{ tour.groupSize }}</span>
           </div>
-        </div>
+        </div> -->
 
-        <div class="tour-footer">
+        <!-- <div class="tour-footer">
           <span class="price">From ${{ tour.price }}</span>
           <button
             pButton
@@ -45,20 +43,20 @@
             class="p-button-warning"
             routerLink="/trips"
           ></button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
-  <div class="show-more-container">
+  <!-- <div class="show-more-container">
     <button
       pButton
       label="Show More Trips"
       class="p-button-outlined p-button-warning show-more-btn"
       routerLink="/trips"
     ></button>
-  </div>
+  </div> -->
 </div>
-<div class="landing-page">
+<!-- <div class="landing-page">
   <p-carousel
     [value]="sliderImages"
     [numVisible]="1"
@@ -85,6 +83,9 @@
       class="p-button-rounded p-button-warning book-now-btn"
     ></button>
   </div>
-</div>
+</div> -->
+<app-testimonials></app-testimonials>
 <app-about></app-about>
+<app-faq></app-faq>
 <app-gallery></app-gallery>
+<app-footer></app-footer>

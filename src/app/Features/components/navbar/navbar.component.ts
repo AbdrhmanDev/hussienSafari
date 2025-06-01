@@ -74,7 +74,7 @@ export class NavbarComponent {
   ];
 
   selectedLanguage = this.languages[0];
-  isLoggedIn = false; // Replace with actual auth logic
+  isLoggedIn = true; // Replace with actual auth logic
   userMenuItems = [
     { label: 'Profile', icon: 'pi pi-user' },
     { label: 'My Bookings', icon: 'pi pi-calendar' },

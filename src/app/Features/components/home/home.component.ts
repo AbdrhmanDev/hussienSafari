@@ -4,14 +4,28 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { TripsService, Trip } from '../../services/trips.service';
-import { AboutComponent } from "../about/about.component";
-import { GalleryComponent } from "../gallery/gallery.component";
-import { PromoComponent } from "../promo/promo.component";
+import { AboutComponent } from '../about/about.component';
+import { GalleryComponent } from '../gallery/gallery.component';
+import { PromoComponent } from '../promo/promo.component';
+import { FooterComponent } from '../footer/footer.component';
+import { TestimonialsComponent } from '../testimonials/testimonials.component';
+import { FaqComponent } from '../faq/faq.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CarouselModule, ButtonModule, RouterLink, AboutComponent, GalleryComponent, PromoComponent],
+  imports: [
+    CommonModule,
+    CarouselModule,
+    ButtonModule,
+    RouterLink,
+    AboutComponent,
+    GalleryComponent,
+    PromoComponent,
+    FooterComponent,
+    TestimonialsComponent,
+    FaqComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
