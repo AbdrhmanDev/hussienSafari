@@ -1,0 +1,63 @@
+<section class="extra-services">
+  <div class="section-header">
+    <span class="subtitle">BEYOND THE TOURS</span>
+    <h2>Additional Services in Hurghada</h2>
+    <p class="description">
+      Let me help make your entire Hurghada experience memorable
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card" *ngFor="let service of extraServices">
+      <div class="service-icon">
+        <i [class]="service.icon"></i>
+      </div>
+      <h3>{{ service.title }}</h3>
+      <p>{{ service.description }}</p>
+      <ul class="benefits-list">
+        <li *ngFor="let benefit of service.benefits">
+          <i class="pi pi-check"></i>
+          <span>{{ benefit }}</span>
+        </li>
+      </ul>
+      <button
+        pButton
+        [label]="'Learn More About ' + service.title"
+        class="p-button-outlined p-button-warning"
+        (click)="openServiceDialog(service.title)"
+      ></button>
+    </div>
+  </div>
+
+  <div class="contact-banner">
+    <div class="banner-content">
+      <i class="pi pi-whatsapp"></i>
+      <div class="text">
+        <h3>Need Assistance?</h3>
+        <p>Contact Hussein directly on WhatsApp for personalized help</p>
+      </div>
+      <button
+        pButton
+        label="Contact Now"
+        icon="pi pi-whatsapp"
+        class="p-button-success"
+      ></button>
+    </div>
+  </div>
+
+  <p-dialog
+    [(visible)]="showDialog"
+    [header]="selectedService"
+    [style]="{ width: '90%', maxWidth: '500px' }"
+    [modal]="true"
+  >
+    <div class="inquiry-form">
+      <h3>Request Information</h3>
+      <p>
+        Please fill out the form below and Hussein will contact you with more
+        details about {{ selectedService }}
+      </p>
+      <!-- Add form content here -->
+    </div>
+  </p-dialog>
+</section>

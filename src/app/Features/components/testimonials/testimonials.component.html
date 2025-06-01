@@ -1,7 +1,8 @@
 <section class="testimonials-section">
-  <div class="testimonials-header">
+  <div class="section-header">
+    <span class="subtitle">TESTIMONIALS</span>
     <h2>What Our Adventurers Say</h2>
-    <p>Real experiences from our valued customers</p>
+    <div class="underline"></div>
   </div>
 
   <div class="testimonials-carousel">
@@ -10,36 +11,40 @@
       [numVisible]="3"
       [numScroll]="1"
       [circular]="true"
-      [autoplayInterval]="5000"
-      [responsiveOptions]="responsiveOptions"
+      [autoplayInterval]="4000"
+      [showNavigators]="false"
       [showIndicators]="true"
+      [responsiveOptions]="responsiveOptions"
     >
       <ng-template let-testimonial pTemplate="item">
         <div class="testimonial-card">
-          <div class="testimonial-header">
+          <div class="quote-icon">
+            <i class="pi pi-quote-right"></i>
+          </div>
+          <p class="comment">{{ testimonial.comment }}</p>
+          <div class="rating">
+            <p-rating
+              [ngModel]="testimonial.rating"
+              [readonly]="true"
+              [stars]="5"
+            ></p-rating>
+          </div>
+          <div class="profile">
             <img
               [src]="testimonial.image"
               [alt]="testimonial.name"
-              class="user-image"
+              class="profile-img"
             />
-            <div class="user-info">
+            <div class="info">
               <h3>{{ testimonial.name }}</h3>
               <span class="location">
-                <i class="pi pi-map-marker"></i> {{ testimonial.location }}
+                <i class="pi pi-map-marker"></i>
+                {{ testimonial.location }}
               </span>
-              <p-rating
-                [ngModel]="testimonial.rating"
-                [readonly]="true"
-              ></p-rating>
             </div>
           </div>
           <div class="tour-type">
-            <i class="pi pi-compass"></i>
-            <span>{{ testimonial.tourType }}</span>
-          </div>
-          <div class="testimonial-content">
-            <i class="pi pi-quote-left quote-icon"></i>
-            <p>{{ testimonial.comment }}</p>
+            <span class="badge">{{ testimonial.tourType }}</span>
           </div>
         </div>
       </ng-template>

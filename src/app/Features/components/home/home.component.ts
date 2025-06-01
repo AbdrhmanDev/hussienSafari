@@ -10,6 +10,8 @@ import { PromoComponent } from '../promo/promo.component';
 import { FooterComponent } from '../footer/footer.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { FaqComponent } from '../faq/faq.component';
+import { ExtraServicesComponent } from '../extra-services/extra-services.component';
+import { TripPlannerComponent } from '../trip-planner/trip-planner.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,8 @@ import { FaqComponent } from '../faq/faq.component';
     FooterComponent,
     TestimonialsComponent,
     FaqComponent,
+    ExtraServicesComponent,
+    TripPlannerComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
