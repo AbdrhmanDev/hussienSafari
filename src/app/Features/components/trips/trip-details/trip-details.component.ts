@@ -15,7 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ReviewsComponent } from '../../reviews/reviews.component';
 import { AddReviewsComponent } from '../../reviews/add-reviews/add-reviews.component';
 import { Review } from '../../../services/reviews.service';
-import 'primeicons/primeicons.css';
+// import 'primeicons/primeicons.css';
 
 @Component({
   selector: 'app-trip-details',
